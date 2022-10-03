@@ -14,18 +14,10 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 const settings = ['Profile', 'Logout'];
 
 const HeaderComponent = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -34,60 +26,30 @@ const HeaderComponent = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" sx={{ backgroundColor: '#3DADC5' }}>
-        <Toolbar disableGutters>
-          <MonitorHeartIcon
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            RegMed
-          </Typography>
+      <Container maxWidth="2560px" sx={{ backgroundColor: '#3DADC5' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <MonitorHeartIcon sx={{ display: { xs: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                display: { xs: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              RegMed
+            </Typography>
+          </Box>
 
-          <Box
-            sx={{
-              backgroundColor: '#3DADC5',
-              flexGrow: 1,
-              display: { xs: 'none', md: 'none' },
-            }}
-          ></Box>
-          <MonitorHeartIcon
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
-          />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            RegMed
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
+            {/* Avatar */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

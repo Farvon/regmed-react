@@ -5,21 +5,23 @@ import Button from '@mui/material/Button';
 
 const SideBarContainer = () => {
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#010F25',
-      }}
-    >
-      <InputBuscador />
-      <Button
-        variant="outlined"
-        sx={{ background: 'white', display: 'flex', margin: 'auto' }}
+    <SideContainer>
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#010F25',
+        }}
       >
-        Buscar
-      </Button>
-    </Box>
+        <InputBuscador />
+        <Button
+          variant="outlined"
+          sx={{ background: 'white', display: 'flex', margin: 'auto' }}
+        >
+          Buscar
+        </Button>
+      </Box>
+    </SideContainer>
   );
 };
 
@@ -32,4 +34,10 @@ const InputBuscador = styled.input`
   height: 2vw;
   border-radius: 5px 5px;
   font-size: 1.5vw;
+`;
+
+const SideContainer = styled.div`
+  display: flex;
+  width: 20%;
+  height: 93vh;
 `;
