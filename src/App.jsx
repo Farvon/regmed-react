@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import HeaderComponent from './components/HeaderComponent';
 import MainContainer from './components/MainContainer';
@@ -9,7 +10,7 @@ function App() {
     <div>
       <HeaderComponent />
       <BodyContainer>
-        <SideBarContainer />
+        {/* <SideBarContainer user={user} setUser={setUser} /> */}
         <MainContainer />
       </BodyContainer>
     </div>

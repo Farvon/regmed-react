@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "nombre": "Facundo",
+    "apellido": "Chiavon",
+    "dni": "33508500",
+    "telefono": "3364208298",
+    "direccion": "27 oeste 623",
+    "mutual": "Galeno",
+    "num_socio": "9239200002",
+    "grup_sang": "H",
+    "fact_sang": "+",
+    "historial": [
+      {
+        "id": 0,
+        "fecha_hist": "12-2-22",
+        "medico_hist": "Pachano",
+        "rama_hist": "Cardiologia",
+        "comentario_hist": "Paciente con taquicardia. Se receta fetabunol x8 cada 4hs"
+      },
+      {
+        "id": 1,
+        "fecha_hist": "12-2-22",
+        "medico_hist": "Pachano",
+        "rama_hist": "Cardiologia",
+        "comentario_hist": "Paciente con taquicardia. Se receta fetabunol x8 cada 4hs"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "nombre": "Gabriela",
+    "apellido": "Bustos",
+    "dni": "34872219",
+    "telefono": "3364329383",
+    "direccion": "P. Jerman",
+    "mutual": "Osde",
+    "num_socio": "0012323-1",
+    "grup_sang": "B",
+    "fact_sang": "+",
+    "historial": [
+      {
+        "id": 0,
+        "fecha_hist": "14-12-21",
+        "medico_hist": "Estornina",
+        "rama_hist": "Medico Clinico",
+        "comentario_hist": "Control General - Estudios Medicos OK."
+      },
+      {
+        "id": 1,
+        "fecha_hist": "21-12-20",
+        "medico_hist": "Castonjauri",
+        "rama_hist": "Neumatologia",
+        "comentario_hist": "Pecho Cerrad - Se diagnostica Omeprazol 4mg/6hs x 5 días"
+      }
+    ]
+  }
+]

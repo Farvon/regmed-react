@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 
-const SideBarContainer = () => {
+const SideBarContainer = ({ user, setUser }) => {
+  const [dni, setDni] = useState();
   return (
     <SideContainer>
       <Box
@@ -13,10 +14,11 @@ const SideBarContainer = () => {
           backgroundColor: '#010F25',
         }}
       >
-        <InputBuscador />
+        <InputBuscador onChange={(e) => setDni(e.target.value)} />
         <Button
           variant="outlined"
           sx={{ background: 'white', display: 'flex', margin: 'auto' }}
+          onClick={() => setUser('info')}
         >
           Buscar
         </Button>
