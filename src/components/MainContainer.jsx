@@ -11,8 +11,8 @@ const MainContainer = () => {
   const [dni, setDni] = useState();
 
   return (
-    <PageContainer id='page-container'>
-      <SideContainer id='side-container'>
+    <PageContainer id="page-container">
+      <SideContainer id="side-container">
         <Box
           sx={{
             width: '100%',
@@ -32,16 +32,16 @@ const MainContainer = () => {
           </StyledLink>
         </Box>
       </SideContainer>
-      
-      <SectionContainer id='section-container'>
-      <Routes>
-        <Route path="/" element={<div>Welcome Page</div>}></Route>
-        <Route
-          path="/search"
-          element={<SearchResult dniPaciente={dni} />}
-        ></Route>
-        <Route path="/info" element={<InfoPaciente />}></Route>
-      </Routes>
+
+      <SectionContainer id="section-container">
+        <Routes>
+          <Route path="/" element={<div>Welcome Page</div>}></Route>
+          <Route
+            path="/search"
+            element={<SearchResult dniPaciente={dni} />}
+          ></Route>
+          <Route path="/info" element={<InfoPaciente />}></Route>
+        </Routes>
       </SectionContainer>
     </PageContainer>
   );
@@ -66,7 +66,7 @@ const InputBuscador = styled.input`
   width: 80%;
   height: 40px;
   border-radius: 5px 5px;
-  font-size: 1.5vw;
+  font-size: 18px;
 `;
 
 const StyledLink = styled(Link)`
@@ -87,7 +87,7 @@ const StyledButton = styled.button`
 
   :hover {
     color: black;
-    background-color: #3DADC5;
+    background-color: #3dadc5;
   }
 `;
 
