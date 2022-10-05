@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getPacientesByDni } from '../services/getPaciente';
+import { getPacientes } from '../services/getPacientes';
 
 const SearchResult = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
 
   useEffect(() => {
-    getPacientesByDni(dniPaciente).then((res) =>
+    getPacientes().then((res) =>
       setPaciente(res.find((e) => e.dni == dniPaciente))
     );
   }, [dniPaciente]);
