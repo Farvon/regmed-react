@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 import styled from 'styled-components';
 import InfoPaciente from './InfoPaciente';
@@ -21,14 +20,14 @@ const MainContainer = () => {
           }}
         >
           <InputBuscador onChange={(e) => setDni(e.target.value)} />
-          <Link to="search">
-            <Button
+          <StyledLink to="search">
+            <StyledButton
               variant="outlined"
               sx={{ background: 'white', display: 'flex', margin: 'auto' }}
             >
               Buscar
-            </Button>
-          </Link>
+            </StyledButton>
+          </StyledLink>
         </Box>
       </SideContainer>
 
@@ -74,4 +73,26 @@ const SideContainer = styled.div`
   display: flex;
   width: 20%;
   height: 93vh;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+`;
+
+const StyledButton = styled.button`
+  cursor: pointer;
+  color: #010f25;
+  font-weight: bold;
+  background-color: white;
+  width: 100%;
+  height: 40px;
+  margin: 5px 16px;
+  border-radius: 10px 10px;
+
+  :hover {
+    color: black;
+    background-color: white;
+    opacity: 1;
+  }
 `;

@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getPacientesByDni } from '../services/getPaciente';
 
 const SearchResult = ({ dniPaciente }) => {
+  const [paciente, setPaciente] = useState([]);
+  const PacienteResult = paciente.find((e) => e.dni == dniPaciente);
+
+  useEffect(() => {
+    getPacientesByDni(dniPaciente).then((res) => setPaciente(res));
+  }, [dniPaciente]);
+
   return (
     <Contenedor>
-      <InfoContainer>DNI: {dniPaciente}</InfoContainer>
+      <InfoContainer>
+        {/*SE ROMPE PORQUE PRIMERO BUSCA UN .nombre EN UN ARRAY VACIO  :'( */}
+        {/* Paciente:{PacienteResult.nombre} {PacienteResult.dni} */}
+        {console.log('Paciente:', PacienteResult)}
+      </InfoContainer>
     </Contenedor>
   );
 };
