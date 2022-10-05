@@ -4,18 +4,27 @@ import { getPacientesByDni } from '../services/getPaciente';
 
 const SearchResult = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
-  const PacienteResult = paciente.find((e) => e.dni == dniPaciente);
 
   useEffect(() => {
-    getPacientesByDni(dniPaciente).then((res) => setPaciente(res));
+    getPacientesByDni(dniPaciente).then((res) =>
+      setPaciente(res.find((e) => e.dni == dniPaciente))
+    );
   }, [dniPaciente]);
 
   return (
     <Contenedor>
       <InfoContainer>
-        {/*SE ROMPE PORQUE PRIMERO BUSCA UN .nombre EN UN ARRAY VACIO  :'( */}
-        {/* Paciente:{PacienteResult.nombre} {PacienteResult.dni} */}
-        {console.log('Paciente:', PacienteResult)}
+        {/* Siempre validamos que exista antes de mostrarlo, sino hace boom */}
+        {paciente ? (
+          <>
+            <InfoTitle>
+              Paciente:{paciente.nombre} {paciente.dni}
+            </InfoTitle>
+            <InfoTable>Aca va la tabla</InfoTable>
+          </>
+        ) : (
+          <span>Ups, parece que no hay nadie con ese DNI.</span>
+        )}
       </InfoContainer>
     </Contenedor>
   );
@@ -26,10 +35,18 @@ export default SearchResult;
 const Contenedor = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  background: #d7ded3;
+  background: lightgray;
 `;
+
+const InfoTitle = styled.span`
+  width: 100%;
+`;
+
+const InfoTable = styled.div``;

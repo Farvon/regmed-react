@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const settings = ['Profile', 'Logout'];
 
@@ -52,7 +53,9 @@ const HeaderComponent = () => {
             {/* Avatar */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Menu">
+                  <AccountCircleIcon />
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
