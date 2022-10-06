@@ -27,6 +27,7 @@ const MainContainer = () => {
           }}
         >
           <InputBuscador
+            placeholder='Ingrese DNI'
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
           />
