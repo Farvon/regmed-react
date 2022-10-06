@@ -3,12 +3,18 @@ import { Link, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Box from '@mui/material/Box';
+import Welcome from './Welcome';
 import InfoPaciente from './InfoPaciente';
 import SearchResult from './SearchResult';
 
 const MainContainer = () => {
-  const [userInput, setUserInput] = useState();
-  const [dni, setDni] = useState();
+  const [userInput, setUserInput] = useState('');
+  const [dni, setDni] = useState('');
+
+  const handleClick = () => {
+    setDni(userInput);
+    setUserInput('');
+  };
 
   return (
     <PageContainer id="page-container">
@@ -20,12 +26,15 @@ const MainContainer = () => {
             backgroundColor: '#010F25',
           }}
         >
-          <InputBuscador onChange={(e) => setUserInput(e.target.value)} />
+          <InputBuscador
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+          />
           <StyledLink to="search">
             <StyledButton
               variant="outlined"
               sx={{ background: 'white', display: 'flex', margin: 'auto' }}
-              onClick={() => setDni(userInput)}
+              onClick={() => handleClick()}
             >
               Buscar
             </StyledButton>
@@ -35,12 +44,15 @@ const MainContainer = () => {
 
       <SectionContainer id="section-container">
         <Routes>
-          <Route path="/" element={<div>Welcome Page</div>}></Route>
+          <Route path="/" element={<Welcome />}></Route>
           <Route
             path="/search"
             element={<SearchResult dniPaciente={dni} />}
           ></Route>
-          <Route path="/info" element={<InfoPaciente />}></Route>
+          <Route
+            path="/info"
+            element={<InfoPaciente dniPaciente={dni} />}
+          ></Route>
         </Routes>
       </SectionContainer>
     </PageContainer>
