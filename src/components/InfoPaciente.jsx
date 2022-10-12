@@ -78,7 +78,7 @@ const InfoPaciente = ({ dniPaciente }) => {
               </PersonalInfoBody>
             </PersonalInfoContainer>
 
-            <PersonalInfoContainer>
+            <PersonalInfoContainer className="comments">
               <PersonalInfoHeader>
                 <PersonalInfoTitle>Comentarios</PersonalInfoTitle>
               </PersonalInfoHeader>
@@ -113,6 +113,7 @@ const InfoPaciente = ({ dniPaciente }) => {
             <PaginationContainer>
               <Pagination
                 commentsPerPage={commentsPerPage}
+                currentPage={currentPage}
                 totalComments={paciente.historial.length}
                 paginate={paginate}
               />
@@ -149,6 +150,10 @@ const PersonalInfoContainer = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   margin: 16px;
+
+  .comments {
+    flex: 2;
+  }
 `;
 
 const PersonalInfoHeader = styled.div`
@@ -287,6 +292,8 @@ const PaginationContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 const InfoTitle = styled.h2`

@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Pagination = ({ commentsPerPage, totalComments, paginate }) => {
+const Pagination = ({
+  commentsPerPage,
+  currentPage,
+  totalComments,
+  paginate,
+}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalComments / commentsPerPage); i++) {
@@ -12,10 +17,14 @@ const Pagination = ({ commentsPerPage, totalComments, paginate }) => {
     <nav>
       <PaginationUl>
         {pageNumbers.map((number) => (
-          <PaginationList key={number} className="page-item">
-            <button onClick={() => paginate(number)} className="page-link">
+          <PaginationList key={number}>
+            <PaginationButton
+              isCurrent={number === currentPage}
+              onClick={() => paginate(number)}
+            >
               {number}
-            </button>
+              {console.log('control', currentPage, number)}
+            </PaginationButton>
           </PaginationList>
         ))}
       </PaginationUl>
@@ -34,4 +43,16 @@ const PaginationUl = styled.ul`
 
 const PaginationList = styled.li`
   margin: 0 4px;
+`;
+
+const PaginationButton = styled.button`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid ${({ isCurrent }) => (isCurrent ? '#3dadc5' : 'lightgray')};
+  font-weight: bold;
+
+  :hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  }
 `;
