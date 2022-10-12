@@ -14,7 +14,7 @@ const SearchResult = ({ dniPaciente }) => {
     setPaciente(searchPacient);
 
     // Ej. consumiendo database desde servicio
-/*     getPacientes().then((res) =>
+    /*     getPacientes().then((res) =>
      setPaciente(res.find((e) => e.dni == dniPaciente))
     ); */
   }, [dniPaciente]);

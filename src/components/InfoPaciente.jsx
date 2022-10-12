@@ -29,7 +29,7 @@ const InfoPaciente = ({ dniPaciente }) => {
     paciente.length !== 0 &&
     paciente.historial.slice(indexOfFirstComment, indexOfLastComment);
 
-  // Change page
+  // Callback to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
