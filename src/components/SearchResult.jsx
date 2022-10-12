@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getPacientes } from '../services/getPacientes';
+
+import { getLocalStorageData } from '../services/localStorageUtils';
+// import { getPacientes } from '../services/getPacientes';
 
 const SearchResult = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
 
   useEffect(() => {
-    getPacientes().then((res) =>
-      setPaciente(res.find((e) => e.dni == dniPaciente))
-    );
+    const database = getLocalStorageData();
+    const searchPacient = database.find((e) => e.dni == dniPaciente);
+    setPaciente(searchPacient);
+
+    // Ej. consumiendo database desde servicio
+/*     getPacientes().then((res) =>
+     setPaciente(res.find((e) => e.dni == dniPaciente))
+    ); */
   }, [dniPaciente]);
 
   return (

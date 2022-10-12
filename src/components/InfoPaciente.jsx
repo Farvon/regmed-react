@@ -1,21 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getPacientes } from '../services/getPacientes';
+
+import { getLocalStorageData } from '../services/localStorageUtils';
+import Pagination from './Pagination';
+// import { getPacientes } from '../services/getPacientes';
 
 const InfoPaciente = ({ dniPaciente }) => {
-  const [paciente, setPaciente] = useState();
+  const [paciente, setPaciente] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [commentsPerPage] = useState(3);
 
   useEffect(() => {
-    getPacientes().then((res) =>
-      setPaciente(res.find((e) => e.dni == dniPaciente))
-    );
+    const database = getLocalStorageData();
+    const searchPacient = database.find((e) => e.dni == dniPaciente);
+    setPaciente(searchPacient);
+
+    // Ej. consumiendo database desde servicio
+    /*     getPacientes().then((res) =>
+     setPaciente(res.find((e) => e.dni == dniPaciente))
+    ); */
   }, [dniPaciente]);
+
+  // Get current comments
+  const indexOfLastComment = currentPage * commentsPerPage;
+  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+  const currentComments =
+    paciente &&
+    paciente.length !== 0 &&
+    paciente.historial.slice(indexOfFirstComment, indexOfLastComment);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Contenedor>
       <InfoContainer>
         {/* Siempre validamos que exista antes de mostrarlo, sino hace boom */}
-        {paciente ? (
+        {paciente && paciente.length !== 0 ? (
           <>
             <PersonalInfoContainer>
               <PersonalInfoHeader>
@@ -62,34 +83,26 @@ const InfoPaciente = ({ dniPaciente }) => {
                 <PersonalInfoTitle>Comentarios</PersonalInfoTitle>
               </PersonalInfoHeader>
               <CommentBodyContainer>
-                {Object.keys(paciente.historial).map((item, idx) => (
+                {currentComments.map((item, idx) => (
                   <CommentContainer key={idx}>
                     <CommentHeader>
                       <CommentGroup>
                         <CommentType>Fecha:</CommentType>
-                        <CommentData>
-                          {paciente.historial[item].fecha_hist}
-                        </CommentData>
+                        <CommentData>{item.fecha_hist}</CommentData>
                       </CommentGroup>
                       <CommentGroup>
                         <CommentType>Médico:</CommentType>
-                        <CommentData>
-                          {paciente.historial[item].medico_hist}
-                        </CommentData>
+                        <CommentData>{item.medico_hist}</CommentData>
                       </CommentGroup>
                       <CommentGroup>
                         <CommentType>Especialidad:</CommentType>
-                        <CommentData>
-                          {paciente.historial[item].rama_hist}
-                        </CommentData>
+                        <CommentData>{item.rama_hist}</CommentData>
                       </CommentGroup>
                     </CommentHeader>
                     <CommentBody>
                       <CommentGroup>
                         <CommentType>Comentario:</CommentType>
-                        <CommentData>
-                          {paciente.historial[item].comentario_hist}
-                        </CommentData>
+                        <CommentData>{item.comentario_hist}</CommentData>
                       </CommentGroup>
                     </CommentBody>
                   </CommentContainer>
@@ -97,11 +110,16 @@ const InfoPaciente = ({ dniPaciente }) => {
                 <AddCommentButton>Agregar Comentario</AddCommentButton>
               </CommentBodyContainer>
             </PersonalInfoContainer>
+            <PaginationContainer>
+              <Pagination
+                commentsPerPage={commentsPerPage}
+                totalComments={paciente.historial.length}
+                paginate={paginate}
+              />
+            </PaginationContainer>
           </>
         ) : (
-          <PersonalInfoContainer>
-            Ups, parece que no hay nadie con ese DNI.
-          </PersonalInfoContainer>
+          <InfoTitle>Ups, parece que no hay nadie con ese DNI.</InfoTitle>
         )}
       </InfoContainer>
     </Contenedor>
@@ -199,6 +217,7 @@ const PersonalInfoData = styled.span`
 `;
 
 const CommentContainer = styled.div`
+  height: 106px;
   border: solid 1px lightgray;
   box-shadow: 0 1px 1px black;
   padding: 8px;
@@ -262,4 +281,16 @@ const AddCommentButton = styled.button`
   :active {
     box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
   }
+`;
+
+const PaginationContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const InfoTitle = styled.h2`
+  width: 100%;
+  text-align: center;
+  margin: 16px 0px 0px 0px;
 `;
