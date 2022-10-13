@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 import { getLocalStorageData } from '../services/localStorageUtils';
 import Pagination from './Pagination';
+import AddCommentModal from './AddCommentModal';
+
 // import { getPacientes } from '../services/getPacientes';
 
 const InfoPaciente = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(3);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     const database = getLocalStorageData();
@@ -107,9 +110,19 @@ const InfoPaciente = ({ dniPaciente }) => {
                     </CommentBody>
                   </CommentContainer>
                 ))}
-                <AddCommentButton>Agregar Comentario</AddCommentButton>
+
+                <AddCommentButton
+                  onClick={() => setShowAddModal(!showAddModal)}
+                >
+                  Agregar Comentario
+                </AddCommentButton>
               </CommentBodyContainer>
             </PersonalInfoContainer>
+            {showAddModal ? (
+              <AddCommentModal
+                onCloseIconClick={() => setShowAddModal(false)}
+              />
+            ) : null}
             <PaginationContainer>
               <Pagination
                 commentsPerPage={commentsPerPage}

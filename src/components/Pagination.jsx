@@ -23,7 +23,6 @@ const Pagination = ({
               onClick={() => paginate(number)}
             >
               {number}
-              {console.log('control', currentPage, number)}
             </PaginationButton>
           </PaginationList>
         ))}

@@ -151,4 +151,17 @@ export const defaultDatabase = [
       },
     ],
   },
+  {
+    id: 4,
+    nombre: 'Pedro',
+    apellido: 'Picapiedra',
+    dni: '12345',
+    telefono: '3364123456',
+    direccion: 'Jey Jey Pastor 222',
+    mutual: 'Swiss Medical',
+    num_socio: '123456-1',
+    grup_sang: '0',
+    fact_sang: '+',
+    historial: [{}],
+  },
 ];
