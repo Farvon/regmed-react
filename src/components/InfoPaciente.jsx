@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import AddComment from './AddComment';
 import { getLocalStorageData } from '../services/localStorageUtils';
 import Pagination from './Pagination';
+import Modal from './ModalTemplate';
 import AddCommentModal from './AddCommentModal';
 
 // import { getPacientes } from '../services/getPacientes';
@@ -119,8 +120,10 @@ const InfoPaciente = ({ dniPaciente }) => {
               </CommentBodyContainer>
             </PersonalInfoContainer>
             {showAddModal ? (
-              <AddCommentModal
+              <Modal
                 onCloseIconClick={() => setShowAddModal(false)}
+                title="Agregar Comentario"
+                content={<AddComment />}
               />
             ) : null}
             <PaginationContainer>
