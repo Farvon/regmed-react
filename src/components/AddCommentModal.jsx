@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import CloseIcon from '@mui/icons-material/Close';
 
 const AddCommentModal = ({ onCloseIconClick }) => {
+  const modalRef = useRef(null);
+
   const handleCloseIconClick = () => {
     if (onCloseIconClick) {
       onCloseIconClick();
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onCloseIconClick();
+      }
+    };
+
+    // Bind and unbind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <Backdrop>
-        <ModalContainer>
+        <ModalContainer ref={modalRef}>
           <ModalForm>
             <FormInfo>
               <ModalSpan>Agregar Comentario</ModalSpan>
@@ -25,9 +41,9 @@ const AddCommentModal = ({ onCloseIconClick }) => {
                 <ModalInput placeholder="Médico" />
               </FormInfo>
               <FormInfo>
-                <select>
-                  <option value="" defaultValue="" required>
-                    - Rama Médica -
+                <select required>
+                  <option value="" defaultValue="">
+                    Rama Médica
                   </option>
                   <option value="Cardiologia">Cardiologia</option>
                   <option value="Medicina General">Medicina General</option>
@@ -52,23 +68,23 @@ export default AddCommentModal;
 
 const Backdrop = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 `;
 
 const ModalContainer = styled.div`
   display: flex;
   width: 80%;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 20px;
+  padding: 16px;
 `;
 
 const ModalForm = styled.div`
@@ -101,29 +117,33 @@ const ModalInput = styled.input`
 
 const ModalComment = styled.textarea`
   resize: none;
+  padding: 4px;
+  margin: 0px 16px;
 `;
 
 const AddCommentButton = styled.button`
   display: flex;
-  margin: auto;
-  margin-top: 16px;
-  width: 240px;
-  text-align: center;
   justify-content: center;
-  color: #090909;
-  padding: 0.7em 1.7em;
+  align-items: center;
+  width: 240px;
+  margin: 16px auto 0;
+  color: white;
+  padding: 12px 24px 12px 24px;
   font-size: 18px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  border: 1px solid #e8e8e8;
-  transition: all 0.3s;
+  border-radius: 8px;
+  background: #3498db;
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border: none;
+  transition: all 0.3s ease;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 
   :hover {
-    border: 1px solid white;
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   }
 
   :active {
-    box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
 `;

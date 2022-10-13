@@ -43,7 +43,7 @@ const InfoPaciente = ({ dniPaciente }) => {
           <>
             <PersonalInfoContainer>
               <PersonalInfoHeader>
-                <PersonalInfoTitle>Personal Info</PersonalInfoTitle>
+                <PersonalInfoTitle>Información Personal</PersonalInfoTitle>
                 <EditButton>Edit</EditButton>
               </PersonalInfoHeader>
               <PersonalInfoBody>
@@ -278,26 +278,28 @@ const CommentData = styled.span`
 
 const AddCommentButton = styled.button`
   display: flex;
-  margin: auto;
-  margin-top: 16px;
-  width: 240px;
-  text-align: center;
   justify-content: center;
-  color: #090909;
-  padding: 0.7em 1.7em;
+  align-items: center;
+  width: 240px;
+  margin: 16px auto;
+  color: white;
+  padding: 12px 24px 12px 24px;
   font-size: 18px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  border: 1px solid #e8e8e8;
-  transition: all 0.3s;
+  border-radius: 8px;
+  background: #3498db;
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border: none;
+  transition: all 0.3s ease;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 
   :hover {
-    border: 1px solid white;
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   }
 
   :active {
-    box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
 `;
 

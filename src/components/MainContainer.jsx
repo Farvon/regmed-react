@@ -27,18 +27,12 @@ const MainContainer = () => {
           }}
         >
           <InputBuscador
-            placeholder='Ingrese DNI'
+            placeholder="Ingrese DNI"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
           />
           <StyledLink to="search">
-            <StyledButton
-              variant="outlined"
-              sx={{ background: 'white', display: 'flex', margin: 'auto' }}
-              onClick={() => handleClick()}
-            >
-              Buscar
-            </StyledButton>
+            <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
           </StyledLink>
         </Box>
       </SideContainer>
