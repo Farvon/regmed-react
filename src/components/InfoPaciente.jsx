@@ -109,6 +109,9 @@ const InfoPaciente = ({ dniPaciente }) => {
                         <CommentData>{item.comentario_hist}</CommentData>
                       </CommentGroup>
                     </CommentBody>
+                    <ViewCommentBottonContainer>
+                      <ViewCommentBotton>Ver Comentario</ViewCommentBotton>
+                    </ViewCommentBottonContainer>
                   </CommentContainer>
                 ))}
 
@@ -238,7 +241,7 @@ const PersonalInfoData = styled.span`
 `;
 
 const CommentContainer = styled.div`
-  height: 106px;
+  height: 110px;
   border: solid 1px lightgray;
   box-shadow: 0 1px 1px black;
   padding: 8px;
@@ -277,6 +280,45 @@ const CommentType = styled.label`
 const CommentData = styled.span`
   margin-left: 6px;
   font-size: 16px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+const ViewCommentBottonContainer = styled.div`
+  display: flex;
+  justify-content: right;
+`;
+
+const ViewCommentBotton = styled.button`
+  cursor: pointer;
+  border: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  background: transparent;
+  color: #3dadc5;
+  padding: 10px;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  margin-right: 15px;
+
+  :before {
+    content: '»';
+    opacity: 0;
+    margin-right: 30px;
+    transition-duration: 0.2s;
+  }
+
+  :hover:before {
+    margin-right: 0px;
+    opacity: 1;
+  }
+
+  :hover {
+    color: black;
+  }
 `;
 
 const AddCommentButton = styled.button`

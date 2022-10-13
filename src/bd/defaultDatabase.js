@@ -91,7 +91,7 @@ export const defaultDatabase = [
         medico_hist: 'Chiavon',
         rama_hist: 'Cardiologia',
         comentario_hist:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula urna, pulvinar eget nisi eget, venenatis suscipit sem. Proin ullamcorper erat eu odio tempus, id convallis magna feugiat. Pellentesque condimentum porta magna, sed scelerisque nibh commodo sit amet.',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula urna, pulvinar eget nisi eget, venenatis suscipit sem. Proin ullamcorper erat eu odio tempus, id convallis magna feugiat. Pellentesque condimentum porta magna, sed scelerisque nibh commodo sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula urna, pulvinar eget nisi eget, venenatis suscipit sem. Proin ullamcorper erat eu odio tempus, id convallis magna feugiat. Pellentesque condimentum porta magna, sed scelerisque nibh commodo sit amet',
       },
       {
         id: 3,
