@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import AddComment from './AddComment';
 import { getLocalStorageData } from '../services/localStorageUtils';
 import Pagination from './Pagination';
-import Modal from './ModalTemplate';
-import AddCommentModal from './AddCommentModal';
+import ModalTemplate from './ModalTemplate';
+import ButtonLink from './ButtonLink';
 
 // import { getPacientes } from '../services/getPacientes';
 
@@ -45,7 +45,7 @@ const InfoPaciente = ({ dniPaciente }) => {
             <PersonalInfoContainer>
               <PersonalInfoHeader>
                 <PersonalInfoTitle>Información Personal</PersonalInfoTitle>
-                <EditButton>Edit</EditButton>
+                <ButtonLink size="16px">Edit</ButtonLink>
               </PersonalInfoHeader>
               <PersonalInfoBody>
                 <PersonalInfoGroup>
@@ -110,7 +110,7 @@ const InfoPaciente = ({ dniPaciente }) => {
                       </CommentGroup>
                     </CommentBody>
                     <ViewCommentBottonContainer>
-                      <ViewCommentBotton>Ver Comentario</ViewCommentBotton>
+                      <ButtonLink size="14px">Ver Comentario</ButtonLink>
                     </ViewCommentBottonContainer>
                   </CommentContainer>
                 ))}
@@ -123,7 +123,7 @@ const InfoPaciente = ({ dniPaciente }) => {
               </CommentBodyContainer>
             </PersonalInfoContainer>
             {showAddModal ? (
-              <Modal
+              <ModalTemplate
                 onCloseIconClick={() => setShowAddModal(false)}
                 title="Agregar Comentario"
                 content={<AddComment />}
@@ -185,34 +185,6 @@ const PersonalInfoHeader = styled.div`
 const PersonalInfoTitle = styled.span`
   font-weight: bold;
   font-size: 24px;
-`;
-
-const EditButton = styled.button`
-  cursor: pointer;
-  border: none;
-  font-family: sans-serif;
-  font-size: 17px;
-  background: transparent;
-  color: #3dadc5;
-  padding: 10px;
-  border-radius: 4px;
-  transition-duration: 0.2s;
-
-  :before {
-    content: '»';
-    opacity: 0;
-    margin-left: -15px;
-    transition-duration: 0.2s;
-  }
-
-  :hover:before {
-    margin-left: 0px;
-    opacity: 1;
-  }
-
-  :hover {
-    color: black;
-  }
 `;
 
 const PersonalInfoBody = styled.div`
@@ -290,35 +262,6 @@ const CommentData = styled.span`
 const ViewCommentBottonContainer = styled.div`
   display: flex;
   justify-content: right;
-`;
-
-const ViewCommentBotton = styled.button`
-  cursor: pointer;
-  border: none;
-  font-family: sans-serif;
-  font-size: 14px;
-  background: transparent;
-  color: #3dadc5;
-  padding: 10px;
-  border-radius: 4px;
-  transition-duration: 0.2s;
-  margin-right: 15px;
-
-  :before {
-    content: '»';
-    opacity: 0;
-    margin-right: 30px;
-    transition-duration: 0.2s;
-  }
-
-  :hover:before {
-    margin-right: 0px;
-    opacity: 1;
-  }
-
-  :hover {
-    color: black;
-  }
 `;
 
 const AddCommentButton = styled.button`

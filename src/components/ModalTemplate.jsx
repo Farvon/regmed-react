@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CloseIcon from '@mui/icons-material/Close';
 
-const AddCommentModal = ({ onCloseIconClick, title, content }) => {
+const ModalTemplate = ({ onCloseIconClick, title, content }) => {
   const modalRef = useRef(null);
 
   const handleCloseIconClick = () => {
@@ -44,7 +44,7 @@ const AddCommentModal = ({ onCloseIconClick, title, content }) => {
   );
 };
 
-export default AddCommentModal;
+export default ModalTemplate;
 
 const Backdrop = styled.div`
   display: flex;
