@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import ButtonLink from './ButtonLink';
 
 import { getLocalStorageData } from '../services/localStorageUtils';
 // import { getPacientes } from '../services/getPacientes';
@@ -44,7 +45,7 @@ const SearchResult = ({ dniPaciente }) => {
                     <Td>{paciente.dni}</Td>
                     <Td>
                       <Link to="/info">
-                        <InfoButton>Info</InfoButton>
+                        <ButtonLink size="16px">Info</ButtonLink>
                       </Link>
                     </Td>
                   </tr>
@@ -133,34 +134,5 @@ const Td = styled.td`
 
   :last-child {
     border-right: none;
-  }
-`;
-
-const InfoButton = styled.button`
-  cursor: pointer;
-  border: none;
-  font-family: sans-serif;
-  font-size: 16px;
-  background: transparent;
-  color: #3dadc5;
-  padding: 2px;
-
-  border-radius: 4px;
-  transition-duration: 0.2s;
-
-  :before {
-    content: '»';
-    opacity: 0;
-    margin-left: -15px;
-    transition-duration: 0.2s;
-  }
-
-  :hover:before {
-    margin-left: 0px;
-    opacity: 1;
-  }
-
-  :hover {
-    color: black;
   }
 `;

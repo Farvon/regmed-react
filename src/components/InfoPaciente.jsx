@@ -13,6 +13,8 @@ const InfoPaciente = ({ dniPaciente }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(3);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [modalContent, setModalContent] = useState();
+  const [modalTitle, setModalTitle] = useState();
 
   useEffect(() => {
     const database = getLocalStorageData();
@@ -45,7 +47,16 @@ const InfoPaciente = ({ dniPaciente }) => {
             <PersonalInfoContainer>
               <PersonalInfoHeader>
                 <PersonalInfoTitle>Información Personal</PersonalInfoTitle>
-                <ButtonLink size="16px">Edit</ButtonLink>
+                <div
+                  onClick={() => {
+                    console.log(showAddModal, modalContent);
+                    setShowAddModal(true);
+                    setModalContent(<AddComment />);
+                    setModalTitle('Editar Información Personal');
+                  }}
+                >
+                  <ButtonLink size="16px">Edit</ButtonLink>
+                </div>
               </PersonalInfoHeader>
               <PersonalInfoBody>
                 <PersonalInfoGroup>
@@ -110,13 +121,26 @@ const InfoPaciente = ({ dniPaciente }) => {
                       </CommentGroup>
                     </CommentBody>
                     <ViewCommentBottonContainer>
-                      <ButtonLink size="14px">Ver Comentario</ButtonLink>
+                      <div
+                        onClick={() => {
+                          setShowAddModal(!showAddModal);
+                          //TO DO - Componente para mostrar los comentarios
+                          setModalContent(<AddComment />);
+                          setModalTitle('Comentario');
+                        }}
+                      >
+                        <ButtonLink size="14px">Ver Comentario</ButtonLink>
+                      </div>
                     </ViewCommentBottonContainer>
                   </CommentContainer>
                 ))}
 
                 <AddCommentButton
-                  onClick={() => setShowAddModal(!showAddModal)}
+                  onClick={() => {
+                    setShowAddModal(!showAddModal);
+                    setModalContent(<AddComment />);
+                    setModalTitle('Agregar Comentario');
+                  }}
                 >
                   Agregar Comentario
                 </AddCommentButton>
@@ -125,8 +149,8 @@ const InfoPaciente = ({ dniPaciente }) => {
             {showAddModal ? (
               <ModalTemplate
                 onCloseIconClick={() => setShowAddModal(false)}
-                title="Agregar Comentario"
-                content={<AddComment />}
+                title={modalTitle}
+                content={modalContent}
               />
             ) : null}
             <PaginationContainer>
@@ -261,7 +285,9 @@ const CommentData = styled.span`
 
 const ViewCommentBottonContainer = styled.div`
   display: flex;
-  justify-content: right;
+  margin: auto;
+  margin-right: 0;
+  width: 150px;
 `;
 
 const AddCommentButton = styled.button`
