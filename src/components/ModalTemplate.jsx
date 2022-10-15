@@ -36,7 +36,6 @@ const ModalTemplate = ({ onCloseIconClick, title, content }) => {
               <CloseIcon onClick={() => handleCloseIconClick()} />
             </FormInfo>
             {content}
-            <AddCommentButton>Agregar</AddCommentButton>
           </ModalForm>
         </ModalContainer>
       </Backdrop>
@@ -60,7 +59,7 @@ const Backdrop = styled.div`
 
 const ModalContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: auto;
   background: #fff;
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -99,31 +98,4 @@ const ModalComment = styled.textarea`
   resize: none;
   padding: 4px;
   margin: 0px 16px;
-`;
-
-const AddCommentButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 240px;
-  margin: 16px auto 0;
-  color: white;
-  padding: 12px 24px 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
-  background: #3498db;
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  border: none;
-  transition: all 0.3s ease;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-
-  :hover {
-    background: #3cb0fd;
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  }
-
-  :active {
-    background: #3498db;
-    background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  }
 `;

@@ -24,6 +24,7 @@ const AddComment = () => {
         cols="100%"
         rows="10"
       ></ModalComment>
+      <AddCommentButton>Agregar</AddCommentButton>
     </>
   );
 };
@@ -47,6 +48,34 @@ const ModalInput = styled.input`
 
 const ModalComment = styled.textarea`
   resize: none;
+  width: 70vw;
   padding: 4px;
   margin: 0px 16px;
+`;
+
+const AddCommentButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  margin: 16px auto 0;
+  color: white;
+  padding: 12px 24px 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  background: #3498db;
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+  :hover {
+    background: #3cb0fd;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  }
+
+  :active {
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  }
 `;

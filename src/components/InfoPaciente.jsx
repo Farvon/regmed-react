@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import AddComment from './AddComment';
+
 import { getLocalStorageData } from '../services/localStorageUtils';
 import Pagination from './Pagination';
 import ModalTemplate from './ModalTemplate';
+import EditInfo from './EditInfo';
+import ViewComment from './ViewComment';
+import AddComment from './AddComment';
 import ButtonLink from './ButtonLink';
 
 // import { getPacientes } from '../services/getPacientes';
@@ -49,9 +52,8 @@ const InfoPaciente = ({ dniPaciente }) => {
                 <PersonalInfoTitle>Información Personal</PersonalInfoTitle>
                 <div
                   onClick={() => {
-                    console.log(showAddModal, modalContent);
                     setShowAddModal(true);
-                    setModalContent(<AddComment />);
+                    setModalContent(<EditInfo paciente={paciente} />);
                     setModalTitle('Editar Información Personal');
                   }}
                 >
@@ -123,9 +125,9 @@ const InfoPaciente = ({ dniPaciente }) => {
                     <ViewCommentBottonContainer>
                       <div
                         onClick={() => {
-                          setShowAddModal(!showAddModal);
+                          setShowAddModal(true);
                           //TO DO - Componente para mostrar los comentarios
-                          setModalContent(<AddComment />);
+                          setModalContent(<ViewComment comment={item} />);
                           setModalTitle('Comentario');
                         }}
                       >
@@ -137,7 +139,7 @@ const InfoPaciente = ({ dniPaciente }) => {
 
                 <AddCommentButton
                   onClick={() => {
-                    setShowAddModal(!showAddModal);
+                    setShowAddModal(true);
                     setModalContent(<AddComment />);
                     setModalTitle('Agregar Comentario');
                   }}
