@@ -140,7 +140,7 @@ const InfoPaciente = ({ dniPaciente }) => {
                 <AddCommentButton
                   onClick={() => {
                     setShowAddModal(true);
-                    setModalContent(<AddComment />);
+                    setModalContent(<AddComment paciente={paciente} />);
                     setModalTitle('Agregar Comentario');
                   }}
                 >
