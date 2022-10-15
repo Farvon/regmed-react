@@ -1,48 +1,154 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const EditInfo = ({ paciente }) => {
+  const [newInfo, setNewInfo] = useState(paciente);
+  const [pacienteEdited, setPacienteEdited] = useState({
+    nombre: paciente.name,
+    apellido: paciente.apellido,
+    dni: paciente.dni,
+    telefono: paciente.telefono,
+    direcion: paciente.dirección,
+    mutual: paciente.mutual,
+    num_socio: paciente.num_socio,
+    grup_sang: paciente.grup_sang,
+    fact_sang: paciente.fact_sang,
+  });
+
+  const UpdateInfo = ({ pacienteEdited }) => {
+    setNewInfo((prevState) => ({
+      ...prevState,
+      nombre: pacienteEdited.nombre,
+      apellido: pacienteEdited.apellido,
+      dni: pacienteEdited.dni,
+    }));
+    console.log(newInfo);
+  };
+
   return (
     <>
       <FormContainer>
         <PersonalInfoBody>
           <PersonalInfoGroup>
             <PersonalInfoType>Nombre</PersonalInfoType>
-            <ModalInput placeholder={paciente.nombre} />
+            <ModalInput
+              value={pacienteEdited.nombre}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  nombre: e.target.value,
+                }))
+              }
+              placeholder={paciente.nombre}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Apellido</PersonalInfoType>
-            <ModalInput placeholder={paciente.Apellido} />
+            <ModalInput
+              value={pacienteEdited.apellido}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  apellido: e.target.value,
+                }))
+              }
+              placeholder={paciente.apellido}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dni</PersonalInfoType>
-            <ModalInput placeholder={paciente.dni} />
+            <ModalInput
+              value={pacienteEdited.dni}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  dni: e.target.value,
+                }))
+              }
+              placeholder={paciente.dni}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Teléfono</PersonalInfoType>
-            <ModalInput placeholder={paciente.telefono} />
+            <ModalInput
+              value={pacienteEdited.telefono}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  telefono: e.target.value,
+                }))
+              }
+              placeholder={paciente.telefono}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dirección</PersonalInfoType>
-            <ModalInput placeholder={paciente.dirección} />
+            <ModalInput
+              value={pacienteEdited.direccion}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  direccion: e.target.value,
+                }))
+              }
+              placeholder={paciente.dirección}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Mutual</PersonalInfoType>
-            <ModalInput placeholder={paciente.mutual} />
+            <ModalInput
+              value={pacienteEdited.mutual}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  mutual: e.target.value,
+                }))
+              }
+              placeholder={paciente.mutual}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>N°</PersonalInfoType>
-            <ModalInput placeholder={paciente.num_socio} />
+            <ModalInput
+              value={pacienteEdited.num_socio}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  num_socio: e.target.value,
+                }))
+              }
+              placeholder={paciente.num_socio}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Grupo Sanguíneo</PersonalInfoType>
-            <ModalInput placeholder={paciente.grup_sang} />
+            <ModalInput
+              value={pacienteEdited.grup_sang}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  grup_sang: e.target.value,
+                }))
+              }
+              placeholder={paciente.grup_sang}
+            />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Factor Sanguíneo</PersonalInfoType>
-            <ModalInput placeholder={paciente.fact_sang} />
+            <ModalInput
+              value={pacienteEdited.fact_sang}
+              onChange={(e) =>
+                setPacienteEdited((prevState) => ({
+                  ...prevState,
+                  fact_sang: e.target.value,
+                }))
+              }
+              placeholder={paciente.fact_sang}
+            />
           </PersonalInfoGroup>
-          <EditButton>Editar</EditButton>
+          <EditButton onClick={() => UpdateInfo({ pacienteEdited })}>
+            Editar
+          </EditButton>
         </PersonalInfoBody>
       </FormContainer>
     </>
