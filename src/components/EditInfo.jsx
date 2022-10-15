@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { setLocalStorageData } from '../services/localStorageUtils';
 
 const EditInfo = ({ paciente }) => {
   const [newInfo, setNewInfo] = useState(paciente);
@@ -21,8 +22,14 @@ const EditInfo = ({ paciente }) => {
       nombre: pacienteEdited.nombre,
       apellido: pacienteEdited.apellido,
       dni: pacienteEdited.dni,
+      telefono: pacienteEdited.telefono,
+      direcion: pacienteEdited.dirección,
+      mutual: pacienteEdited.mutual,
+      num_socio: pacienteEdited.num_socio,
+      grup_sang: pacienteEdited.grup_sang,
+      fact_sang: pacienteEdited.fact_sang,
     }));
-    console.log(newInfo);
+    setLocalStorageData([newInfo]);
   };
 
   return (

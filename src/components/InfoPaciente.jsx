@@ -28,7 +28,7 @@ const InfoPaciente = ({ dniPaciente }) => {
     /*     getPacientes().then((res) =>
      setPaciente(res.find((e) => e.dni == dniPaciente))
     ); */
-  }, [dniPaciente]);
+  }, [dniPaciente, showAddModal]);
 
   // Get current comments
   const indexOfLastComment = currentPage * commentsPerPage;
