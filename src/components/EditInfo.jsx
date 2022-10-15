@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { setLocalStorageData } from '../services/localStorageUtils';
 
 const EditInfo = ({ paciente }) => {
-  const [newInfo, setNewInfo] = useState(paciente);
   const [pacienteEdited, setPacienteEdited] = useState({
     nombre: paciente.name,
     apellido: paciente.apellido,
@@ -17,8 +16,7 @@ const EditInfo = ({ paciente }) => {
   });
 
   const UpdateInfo = ({ pacienteEdited }) => {
-    setNewInfo((prevState) => ({
-      ...prevState,
+    const info = {
       nombre: pacienteEdited.nombre,
       apellido: pacienteEdited.apellido,
       dni: pacienteEdited.dni,
@@ -28,8 +26,10 @@ const EditInfo = ({ paciente }) => {
       num_socio: pacienteEdited.num_socio,
       grup_sang: pacienteEdited.grup_sang,
       fact_sang: pacienteEdited.fact_sang,
-    }));
-    setLocalStorageData([newInfo]);
+      historial: paciente.historial,
+    };
+
+    setLocalStorageData([info]);
   };
 
   return (
@@ -46,7 +46,7 @@ const EditInfo = ({ paciente }) => {
                   nombre: e.target.value,
                 }))
               }
-              placeholder={paciente.nombre}
+              defaultValue={paciente.nombre}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -59,7 +59,7 @@ const EditInfo = ({ paciente }) => {
                   apellido: e.target.value,
                 }))
               }
-              placeholder={paciente.apellido}
+              defaultValue={paciente.apellido}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -72,7 +72,7 @@ const EditInfo = ({ paciente }) => {
                   dni: e.target.value,
                 }))
               }
-              placeholder={paciente.dni}
+              defaultValue={paciente.dni}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -85,7 +85,7 @@ const EditInfo = ({ paciente }) => {
                   telefono: e.target.value,
                 }))
               }
-              placeholder={paciente.telefono}
+              defaultValue={paciente.telefono}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -98,7 +98,7 @@ const EditInfo = ({ paciente }) => {
                   direccion: e.target.value,
                 }))
               }
-              placeholder={paciente.dirección}
+              defaultValue={paciente.dirección}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -111,7 +111,7 @@ const EditInfo = ({ paciente }) => {
                   mutual: e.target.value,
                 }))
               }
-              placeholder={paciente.mutual}
+              defaultValue={paciente.mutual}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -124,7 +124,7 @@ const EditInfo = ({ paciente }) => {
                   num_socio: e.target.value,
                 }))
               }
-              placeholder={paciente.num_socio}
+              defaultValue={paciente.num_socio}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -137,7 +137,7 @@ const EditInfo = ({ paciente }) => {
                   grup_sang: e.target.value,
                 }))
               }
-              placeholder={paciente.grup_sang}
+              defaultValue={paciente.grup_sang}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
@@ -150,7 +150,7 @@ const EditInfo = ({ paciente }) => {
                   fact_sang: e.target.value,
                 }))
               }
-              placeholder={paciente.fact_sang}
+              defaultValue={paciente.fact_sang}
             />
           </PersonalInfoGroup>
           <EditButton onClick={() => UpdateInfo({ pacienteEdited })}>

@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { setLocalStorageData } from '../services/localStorageUtils';
 
 const AddComment = ({ paciente }) => {
-  const [newComment, setNewComment] = useState({});
   const [comment, setComment] = useState({
-    id: '',
     comentario_hist: paciente.apellido,
-    fecha_hist: '',
     medico_hist: paciente.telefono,
     rama_hist: paciente.dirección,
   });
 
   const PushComment = (comment) => {
-    const lastId = paciente.historial.length;
-    setComment((prevState) => ({
-      ...prevState,
+    const info = {
       id: paciente.historial.length,
       fecha_hist: new Date(),
-    }));
-    setNewComment(comment);
-    paciente.historial.push(newComment);
-    console.log(paciente.historial);
+      comentario_hist: comment.comentario_hist,
+      medico_hist: comment.medico_hist,
+      rama_hist: comment.rama_hist,
+    };
+    paciente.historial.push(info);
+    setLocalStorageData([paciente]);
   };
 
   return (
@@ -67,7 +65,7 @@ const AddComment = ({ paciente }) => {
           }));
         }}
       ></ModalComment>
-      <AddCommentButton onClick={() => PushComment({ comment })}>
+      <AddCommentButton onClick={() => PushComment(comment)}>
         Agregar
       </AddCommentButton>
     </>
