@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { setLocalStorageData } from '../services/localStorageUtils';
+import {
+  setLocalStorageData,
+  getLocalStorageData,
+} from '../services/localStorageUtils';
 
 const EditInfo = ({ paciente }) => {
+  const database = getLocalStorageData();
   const [pacienteEdited, setPacienteEdited] = useState({
-    nombre: paciente.name,
+    id: paciente.id,
+    nombre: paciente.nombre,
     apellido: paciente.apellido,
     dni: paciente.dni,
     telefono: paciente.telefono,
-    direcion: paciente.dirección,
+    direccion: paciente.direccion,
     mutual: paciente.mutual,
     num_socio: paciente.num_socio,
     grup_sang: paciente.grup_sang,
@@ -17,11 +22,12 @@ const EditInfo = ({ paciente }) => {
 
   const UpdateInfo = ({ pacienteEdited }) => {
     const info = {
+      id: pacienteEdited.id,
       nombre: pacienteEdited.nombre,
       apellido: pacienteEdited.apellido,
       dni: pacienteEdited.dni,
       telefono: pacienteEdited.telefono,
-      direcion: pacienteEdited.dirección,
+      direccion: pacienteEdited.direccion,
       mutual: pacienteEdited.mutual,
       num_socio: pacienteEdited.num_socio,
       grup_sang: pacienteEdited.grup_sang,
@@ -29,7 +35,9 @@ const EditInfo = ({ paciente }) => {
       historial: paciente.historial,
     };
 
-    setLocalStorageData([info]);
+    const newDB = database.filter((item) => item.dni != info.dni);
+    newDB.push(info);
+    setLocalStorageData(newDB);
   };
 
   return (
