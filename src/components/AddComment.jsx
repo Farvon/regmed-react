@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { setLocalStorageData } from '../services/localStorageUtils';
+import {
+  setLocalStorageData,
+  getLocalStorageData,
+} from '../services/localStorageUtils';
 
 const AddComment = ({ paciente }) => {
+  const database = getLocalStorageData();
   const [comment, setComment] = useState({
     comentario_hist: paciente.apellido,
     medico_hist: paciente.telefono,
@@ -18,7 +22,12 @@ const AddComment = ({ paciente }) => {
       rama_hist: comment.rama_hist,
     };
     paciente.historial.push(info);
-    setLocalStorageData([paciente]);
+
+    const newDB = database.filter((item) => item.dni != paciente.dni);
+    newDB.push(paciente);
+    setLocalStorageData(newDB);
+
+    // setLocalStorageData([paciente]);
   };
 
   return (

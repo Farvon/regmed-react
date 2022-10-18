@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Welcome from './Welcome';
 import InfoPaciente from './InfoPaciente';
 import SearchResult from './SearchResult';
+import AddPaciente from './AddPaciente';
 
 const MainContainer = () => {
   const [userInput, setUserInput] = useState('');
@@ -34,6 +35,11 @@ const MainContainer = () => {
           <StyledLink to="search">
             <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
           </StyledLink>
+          <StyledLink to="addNewPaciente">
+            <StyledButton onClick={() => handleClick()}>
+              Agregar Paciente
+            </StyledButton>
+          </StyledLink>
         </Box>
       </SideContainer>
 
@@ -44,6 +50,7 @@ const MainContainer = () => {
             path="/search"
             element={<SearchResult dniPaciente={dni} />}
           ></Route>
+          <Route path="/addNewPaciente" element={<AddPaciente />}></Route>
           <Route
             path="/info"
             element={<InfoPaciente dniPaciente={dni} />}
