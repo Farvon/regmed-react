@@ -8,6 +8,7 @@ import {
 const AddPaciente = () => {
   const database = getLocalStorageData();
   const newId = database.length;
+  const [err, setErr] = useState(false);
   const [newPaciente, setNewPaciente] = useState({
     id: '',
     nombre: '',
@@ -37,8 +38,19 @@ const AddPaciente = () => {
       historial: [],
     };
 
-    database.push(info);
-    setLocalStorageData(database);
+    if ((info.nombre != '') & (info.apellido != '') & (info.dni != '')) {
+      database.push(info);
+
+      setLocalStorageData(database);
+    } else {
+      setErr(true);
+    }
+  };
+
+  const HandleAdd = (isEnable) => {
+    const elemento = document.getElementsByName('add');
+    console.log(elemento);
+    elemento[0].disabled = isEnable;
   };
 
   return (
@@ -49,113 +61,137 @@ const AddPaciente = () => {
             <PersonalInfoType>Nombre</PersonalInfoType>
             <ModalInput
               value={newPaciente.nombre}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   nombre: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Apellido</PersonalInfoType>
             <ModalInput
               value={newPaciente.apellido}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   apellido: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dni</PersonalInfoType>
             <ModalInput
               value={newPaciente.dni}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   dni: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Teléfono</PersonalInfoType>
             <ModalInput
               value={newPaciente.telefono}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   telefono: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dirección</PersonalInfoType>
             <ModalInput
               value={newPaciente.direccion}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   direccion: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Mutual</PersonalInfoType>
             <ModalInput
               value={newPaciente.mutual}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   mutual: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>N°</PersonalInfoType>
             <ModalInput
               value={newPaciente.num_socio}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   num_socio: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Grupo Sanguíneo</PersonalInfoType>
             <ModalInput
               value={newPaciente.grup_sang}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   grup_sang: e.target.value,
-                }))
-              }
+                }));
+                HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Factor Sanguíneo</PersonalInfoType>
             <ModalInput
               value={newPaciente.fact_sang}
-              onChange={(e) =>
+              onChange={(e) => {
                 setNewPaciente((prevState) => ({
                   ...prevState,
                   fact_sang: e.target.value,
-                }))
-              }
+                })),
+                  HandleAdd(false);
+                setErr(false);
+              }}
             />
           </PersonalInfoGroup>
-          <AddButton onClick={() => AddNewPaciente({ newPaciente })}>
+          <AddButton
+            name="add"
+            onClick={() => {
+              AddNewPaciente({ newPaciente }), HandleAdd(true);
+            }}
+          >
             Agregar Paciente
           </AddButton>
+          {err && <div>Ingreso Incorrecto</div>}
         </PersonalInfoBody>
       </FormContainer>
     </>
@@ -224,6 +260,10 @@ const AddButton = styled.button`
   border: none;
   transition: all 0.3s ease;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+  :disabled {
+    opacity: 0.2;
+  }
 
   :hover {
     background: #3cb0fd;

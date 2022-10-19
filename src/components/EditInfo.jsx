@@ -7,6 +7,7 @@ import {
 
 const EditInfo = ({ paciente }) => {
   const database = getLocalStorageData();
+
   const [pacienteEdited, setPacienteEdited] = useState({
     id: paciente.id,
     nombre: paciente.nombre,
@@ -40,6 +41,11 @@ const EditInfo = ({ paciente }) => {
     setLocalStorageData(newDB);
   };
 
+  const HundleEnable = (isEnable) => {
+    const elemento = document.getElementsByName('edit');
+    elemento[0].disabled = isEnable;
+  };
+
   return (
     <>
       <FormContainer>
@@ -48,120 +54,117 @@ const EditInfo = ({ paciente }) => {
             <PersonalInfoType>Nombre</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.nombre}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   nombre: e.target.value,
-                }))
-              }
-              defaultValue={paciente.nombre}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Apellido</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.apellido}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   apellido: e.target.value,
-                }))
-              }
-              defaultValue={paciente.apellido}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dni</PersonalInfoType>
-            <ModalInput
-              value={pacienteEdited.dni}
-              onChange={(e) =>
-                setPacienteEdited((prevState) => ({
-                  ...prevState,
-                  dni: e.target.value,
-                }))
-              }
-              defaultValue={paciente.dni}
-            />
+            <ModalInput value={pacienteEdited.dni} disabled />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Teléfono</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.telefono}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   telefono: e.target.value,
-                }))
-              }
-              defaultValue={paciente.telefono}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dirección</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.direccion}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   direccion: e.target.value,
-                }))
-              }
-              defaultValue={paciente.dirección}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Mutual</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.mutual}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   mutual: e.target.value,
-                }))
-              }
-              defaultValue={paciente.mutual}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>N°</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.num_socio}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   num_socio: e.target.value,
-                }))
-              }
-              defaultValue={paciente.num_socio}
+                }));
+                HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Grupo Sanguíneo</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.grup_sang}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   grup_sang: e.target.value,
-                }))
-              }
-              defaultValue={paciente.grup_sang}
+                })),
+                  HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Factor Sanguíneo</PersonalInfoType>
             <ModalInput
               value={pacienteEdited.fact_sang}
-              onChange={(e) =>
+              onChange={(e) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   fact_sang: e.target.value,
-                }))
-              }
-              defaultValue={paciente.fact_sang}
+                })),
+                  HundleEnable(false);
+              }}
             />
           </PersonalInfoGroup>
-          <EditButton onClick={() => UpdateInfo({ pacienteEdited })}>
+
+          <EditButton
+            name="edit"
+            onClick={() => {
+              UpdateInfo({ pacienteEdited }), HundleEnable(true);
+            }}
+          >
             Editar
           </EditButton>
         </PersonalInfoBody>
@@ -176,11 +179,6 @@ const FormContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px;
-`;
-
-const FormInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
 
 const ModalInput = styled.input`
@@ -200,11 +198,6 @@ const PersonalInfoBody = styled.div`
 
 const PersonalInfoGroup = styled.form`
   display: flex;
-`;
-
-const RadiusInfoGroup = styled.div`
-  display: flex;
-  margin: auto;
 `;
 
 const PersonalInfoType = styled.label`
@@ -232,6 +225,10 @@ const EditButton = styled.button`
   border: none;
   transition: all 0.3s ease;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+  :disabled {
+    opacity: 0.2;
+  }
 
   :hover {
     background: #3cb0fd;
