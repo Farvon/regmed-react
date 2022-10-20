@@ -4,8 +4,10 @@ import {
   setLocalStorageData,
   getLocalStorageData,
 } from '../services/localStorageUtils';
+import * as fs from 'fs';
 
 const AddPaciente = () => {
+  const [isEnable, setIsEnable] = useState(true);
   const database = getLocalStorageData();
   const newId = database.length;
   const [err, setErr] = useState(false);
@@ -49,7 +51,6 @@ const AddPaciente = () => {
 
   const HandleAdd = (isEnable) => {
     const elemento = document.getElementsByName('add');
-    console.log(elemento);
     elemento[0].disabled = isEnable;
   };
 
@@ -66,7 +67,8 @@ const AddPaciente = () => {
                   ...prevState,
                   nombre: e.target.value,
                 }));
-                HandleAdd(false);
+                setIsEnable(false);
+                HandleAdd(isEnable);
                 setErr(false);
               }}
             />
@@ -191,7 +193,7 @@ const AddPaciente = () => {
           >
             Agregar Paciente
           </AddButton>
-          {err && <div>Ingreso Incorrecto</div>}
+          {err && <ErrorSpan>Ingreso Incorrecto</ErrorSpan>}
         </PersonalInfoBody>
       </FormContainer>
     </>
@@ -204,11 +206,7 @@ const FormContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px;
-`;
-
-const FormInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
+  margin: auto;
 `;
 
 const ModalInput = styled.input`
@@ -228,11 +226,6 @@ const PersonalInfoBody = styled.div`
 
 const PersonalInfoGroup = styled.form`
   display: flex;
-`;
-
-const RadiusInfoGroup = styled.div`
-  display: flex;
-  margin: auto;
 `;
 
 const PersonalInfoType = styled.label`
@@ -274,4 +267,11 @@ const AddButton = styled.button`
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
+`;
+
+const ErrorSpan = styled.span`
+  display: flex;
+  margin: auto;
+  font-size: 16px;
+  color: gray;
 `;
