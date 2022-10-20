@@ -7,11 +7,18 @@ import {
 
 const AddComment = ({ paciente }) => {
   const database = getLocalStorageData();
+  const [err, setErr] = useState(false);
+  const [isEnable, setIsEnable] = useState(true);
   const [comment, setComment] = useState({
-    comentario_hist: paciente.apellido,
-    medico_hist: paciente.telefono,
-    rama_hist: paciente.dirección,
+    comentario_hist: '',
+    medico_hist: '',
+    rama_hist: '',
   });
+
+  const HandleAdd = (isEnable) => {
+    const elemento = document.getElementsByName('add');
+    elemento[0].disabled = isEnable;
+  };
 
   const PushComment = (comment) => {
     const info = {
@@ -21,13 +28,20 @@ const AddComment = ({ paciente }) => {
       medico_hist: comment.medico_hist,
       rama_hist: comment.rama_hist,
     };
-    paciente.historial.push(info);
 
-    const newDB = database.filter((item) => item.dni != paciente.dni);
-    newDB.push(paciente);
-    setLocalStorageData(newDB);
+    if (
+      (info.comentario_hist != '') &
+      (info.medico_hist != '') &
+      (info.rama_hist != '')
+    ) {
+      paciente.historial.push(info);
 
-    // setLocalStorageData([paciente]);
+      const newDB = database.filter((item) => item.dni != paciente.dni);
+      newDB.push(paciente);
+      setLocalStorageData(newDB);
+    } else {
+      setErr(true);
+    }
   };
 
   return (
@@ -40,6 +54,9 @@ const AddComment = ({ paciente }) => {
                 ...prevState,
                 medico_hist: e.target.value,
               }));
+              setIsEnable(false);
+              HandleAdd(false);
+              setErr(false);
             }}
             placeholder="Médico"
           />
@@ -52,6 +69,9 @@ const AddComment = ({ paciente }) => {
                 ...prevState,
                 rama_hist: e.target.value,
               }));
+              setIsEnable(false);
+              HandleAdd(false);
+              setErr(false);
             }}
           >
             <option value="" defaultValue="">
@@ -72,11 +92,20 @@ const AddComment = ({ paciente }) => {
             ...prevState,
             comentario_hist: e.target.value,
           }));
+          setIsEnable(false);
+          HandleAdd(false);
+          setErr(false);
         }}
       ></ModalComment>
-      <AddCommentButton onClick={() => PushComment(comment)}>
+      <AddCommentButton
+        name="add"
+        onClick={() => {
+          PushComment(comment), HandleAdd(true);
+        }}
+      >
         Agregar
       </AddCommentButton>
+      {err && <ErrorSpan>Favor de completar todos los campos</ErrorSpan>}
     </>
   );
 };
@@ -121,6 +150,10 @@ const AddCommentButton = styled.button`
   transition: all 0.3s ease;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 
+  :disabled {
+    opacity: 0.2;
+  }
+
   :hover {
     background: #3cb0fd;
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
@@ -130,4 +163,11 @@ const AddCommentButton = styled.button`
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
+`;
+
+const ErrorSpan = styled.span`
+  display: flex;
+  margin: auto;
+  font-size: 16px;
+  color: gray;
 `;

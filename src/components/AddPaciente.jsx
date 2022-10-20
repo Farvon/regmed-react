@@ -4,7 +4,6 @@ import {
   setLocalStorageData,
   getLocalStorageData,
 } from '../services/localStorageUtils';
-import * as fs from 'fs';
 
 const AddPaciente = () => {
   const [isEnable, setIsEnable] = useState(true);
@@ -193,7 +192,12 @@ const AddPaciente = () => {
           >
             Agregar Paciente
           </AddButton>
-          {err && <ErrorSpan>Ingreso Incorrecto</ErrorSpan>}
+          {err && (
+            <>
+              <ErrorSpan>Ingreso Incorrecto</ErrorSpan>
+              <ErrorSpan>Nombre, Apellido y DNI son Requeridos</ErrorSpan>
+            </>
+          )}
         </PersonalInfoBody>
       </FormContainer>
     </>
