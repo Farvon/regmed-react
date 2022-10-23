@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ButtonLink from './ButtonLink';
 
-import { getLocalStorageData } from '../services/localStorageUtils';
-// import { getPacientes } from '../services/getPacientes';
+import { getPacientByDni } from '../services/pacients';
+import ButtonLink from './ButtonLink';
 
 const SearchResult = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
 
   useEffect(() => {
-    const database = getLocalStorageData();
-    const searchPacient = database.find((e) => e.dni == dniPaciente);
-    setPaciente(searchPacient);
-
-    // Ej. consumiendo database desde servicio
-    /*     getPacientes().then((res) =>
-     setPaciente(res.find((e) => e.dni == dniPaciente))
-    ); */
+    getPacientByDni(dniPaciente).then((paciente) => setPaciente(paciente));
   }, [dniPaciente]);
 
   return (
     <Contenedor>
       <InfoContainer>
-        {/* Siempre validamos que exista antes de mostrarlo, sino hace boom */}
         {paciente ? (
           <>
             <InfoTitle>Resultado de la búsqueda</InfoTitle>

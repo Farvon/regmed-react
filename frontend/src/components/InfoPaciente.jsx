@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { getLocalStorageData } from '../services/localStorageUtils';
+import { getPacientByDni } from '../services/pacients';
 import Pagination from './Pagination';
 import ModalTemplate from './ModalTemplate';
 import EditInfo from './EditInfo';
 import ViewComment from './ViewComment';
 import AddComment from './AddComment';
 import ButtonLink from './ButtonLink';
-
-// import { getPacientes } from '../services/getPacientes';
 
 const InfoPaciente = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
@@ -20,14 +18,7 @@ const InfoPaciente = ({ dniPaciente }) => {
   const [modalTitle, setModalTitle] = useState();
 
   useEffect(() => {
-    const database = getLocalStorageData();
-    const searchPacient = database.find((e) => e.dni == dniPaciente);
-    setPaciente(searchPacient);
-
-    // Ej. consumiendo database desde servicio
-    /*     getPacientes().then((res) =>
-     setPaciente(res.find((e) => e.dni == dniPaciente))
-    ); */
+    getPacientByDni(dniPaciente).then((paciente) => setPaciente(paciente));
   }, [dniPaciente, showAddModal]);
 
   // Get current comments

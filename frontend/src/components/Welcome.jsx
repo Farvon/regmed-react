@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import Typography from '@mui/material/Typography';
 
-const Welcome = ({ dniPaciente }) => {
+const Welcome = () => {
   return (
     <Contenedor>
       <InfoContainer>
