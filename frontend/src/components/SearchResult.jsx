@@ -36,7 +36,7 @@ const SearchResult = ({ dniPaciente }) => {
                     <Td>{paciente.dni}</Td>
                     <Td>
                       <Link to="/info">
-                        <ButtonLink size="16px">Info</ButtonLink>
+                        <ButtonLink fontSize="16px">Info</ButtonLink>
                       </Link>
                     </Td>
                   </tr>

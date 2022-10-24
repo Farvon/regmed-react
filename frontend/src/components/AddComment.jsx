@@ -1,47 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  setLocalStorageData,
-  getLocalStorageData,
-} from '../services/localStorageUtils';
+import { putPacientComment } from '../services/pacients';
 
-const AddComment = ({ paciente }) => {
-  const database = getLocalStorageData();
-  const [err, setErr] = useState(false);
-  const [isEnable, setIsEnable] = useState(true);
-  const [comment, setComment] = useState({
-    comentario_hist: '',
-    medico_hist: '',
-    rama_hist: '',
-  });
+const AddComment = ({ dniPaciente }) => {
+  const [medicalName, setMedicalName] = useState('');
+  const [medicalBranch, setMedicalBranch] = useState('Rama Médica');
+  const [medicalComment, setMedicalComment] = useState('');
 
-  const HandleAdd = (isEnable) => {
-    const elemento = document.getElementsByName('add');
-    elemento[0].disabled = isEnable;
-  };
-
-  const PushComment = (comment) => {
-    const info = {
-      id: paciente.historial.length,
-      fecha_hist: new Date(),
-      comentario_hist: comment.comentario_hist,
-      medico_hist: comment.medico_hist,
-      rama_hist: comment.rama_hist,
+  const handleAddNewComment = () => {
+    const newCommet = {
+      fecha_hist: new Date().toDateString,
+      medico_hist: medicalName,
+      rama_hist: medicalBranch,
+      comentario_hist: medicalComment,
     };
-
-    if (
-      (info.comentario_hist != '') &
-      (info.medico_hist != '') &
-      (info.rama_hist != '')
-    ) {
-      paciente.historial.push(info);
-
-      const newDB = database.filter((item) => item.dni != paciente.dni);
-      newDB.push(paciente);
-      setLocalStorageData(newDB);
-    } else {
-      setErr(true);
-    }
+    putPacientComment(dniPaciente, newCommet).then((res) => console.log(res));
   };
 
   return (
@@ -49,63 +22,41 @@ const AddComment = ({ paciente }) => {
       <FormContainer>
         <FormInfo>
           <ModalInput
-            onChange={(e) => {
-              setComment((prevState) => ({
-                ...prevState,
-                medico_hist: e.target.value,
-              }));
-              setIsEnable(false);
-              HandleAdd(false);
-              setErr(false);
-            }}
+            value={medicalName}
+            onChange={(e) => setMedicalName(e.target.value)}
             placeholder="Médico"
           />
         </FormInfo>
         <FormInfo>
           <select
-            required
+            value={medicalBranch}
             onChange={(e) => {
-              setComment((prevState) => ({
-                ...prevState,
-                rama_hist: e.target.value,
-              }));
-              setIsEnable(false);
-              HandleAdd(false);
-              setErr(false);
+              setMedicalBranch(e.target.value);
             }}
+            placeholder="Rama Médica"
           >
-            <option value="" defaultValue="">
-              Rama Médica
-            </option>
+            <option disabled>Rama Médica</option>
             <option value="Cardiologia">Cardiologia</option>
             <option value="Medicina General">Medicina General</option>
           </select>
         </FormInfo>
       </FormContainer>
       <ModalComment
-        id="comentario"
-        name="comentario"
         cols="100%"
         rows="10"
+        value={medicalComment}
         onChange={(e) => {
-          setComment((prevState) => ({
-            ...prevState,
-            comentario_hist: e.target.value,
-          }));
-          setIsEnable(false);
-          HandleAdd(false);
-          setErr(false);
+          setMedicalComment(e.target.value);
         }}
       ></ModalComment>
       <AddCommentButton
-        name="add"
+        disabled={!medicalName || !medicalBranch || !medicalComment}
         onClick={() => {
-          PushComment(comment), HandleAdd(true);
+          handleAddNewComment();
         }}
       >
         Agregar
       </AddCommentButton>
-      {err && <ErrorSpan>Favor de completar todos los campos</ErrorSpan>}
     </>
   );
 };

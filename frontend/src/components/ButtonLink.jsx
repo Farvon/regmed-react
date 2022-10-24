@@ -1,10 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonLink = ({ children, size }) => {
+const ButtonLink = ({ children, fontSize, onClick }) => {
+  const handleClick = (e) => {
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <>
-      <StyledButton size={size}>{children}</StyledButton>
+      <StyledButton fontSize={fontSize} onClick={(e) => handleClick(e)}>
+        {children}
+      </StyledButton>
     </>
   );
 };
@@ -15,7 +23,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   border: none;
   font-family: sans-serif;
-  font-size: ${({ size }) => size};
+  font-size: ${({ fontSize }) => fontSize};
   background: transparent;
   color: #3dadc5;
   padding: 10px;
