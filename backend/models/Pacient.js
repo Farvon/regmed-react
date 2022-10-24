@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 // Creamos el esquema de los comentarios
 const historialSchema = new Schema({
@@ -12,7 +13,7 @@ const historialSchema = new Schema({
 const pacientSchema = new Schema({
   nombre: String,
   apellido: String,
-  dni: String,
+  dni: { type: String, unique: true },
   telefono: String,
   direccion: String,
   mutual: String,
@@ -21,6 +22,9 @@ const pacientSchema = new Schema({
   fact_sang: String,
   historial: [historialSchema],
 });
+
+// Añadimos el plugin para verificar que sea unico al esquema
+pacientSchema.plugin(uniqueValidator);
 
 // Asignamos al modelo Paciente el esquema creado
 const Pacient = model('Pacient', pacientSchema);

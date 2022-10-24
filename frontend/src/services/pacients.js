@@ -30,4 +30,16 @@ const putPacientComment = (dni, comment) => {
   return request.then((response) => response.data);
 };
 
-export { getAllPacients, getPacientByDni, putPacientComment };
+const postNewPacient = (newPacient) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = axios.post(baseUrl, newPacient, config);
+
+  return request.then((response) => response.data);
+};
+
+export { getAllPacients, getPacientByDni, putPacientComment, postNewPacient };

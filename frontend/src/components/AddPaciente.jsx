@@ -1,216 +1,154 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  setLocalStorageData,
-  getLocalStorageData,
-} from '../services/localStorageUtils';
+import useAlert from '../hooks/useAlert';
+
+import { postNewPacient } from '../services/pacients';
 
 const AddPaciente = () => {
-  const [isEnable, setIsEnable] = useState(true);
-  const database = getLocalStorageData();
-  const newId = database.length;
-  const [err, setErr] = useState(false);
-  const [newPaciente, setNewPaciente] = useState({
-    id: '',
-    nombre: '',
-    apellido: '',
-    dni: '',
-    telefono: '',
-    direccion: '',
-    mutual: '',
-    num_socio: '',
-    grup_sang: '',
-    fact_sang: '',
-    historial: [],
-  });
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [dni, setDni] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [mutual, setMutual] = useState('');
+  const [numSocio, setNumSocio] = useState('');
+  const [grupSang, setGrupSang] = useState('');
+  const [factSang, setFactSang] = useState('');
 
-  const AddNewPaciente = ({ newPaciente }) => {
-    const info = {
-      id: newId + 1,
-      nombre: newPaciente.nombre,
-      apellido: newPaciente.apellido,
-      dni: newPaciente.dni,
-      telefono: newPaciente.telefono,
-      direccion: newPaciente.direccion,
-      mutual: newPaciente.mutual,
-      num_socio: newPaciente.num_socio,
-      grup_sang: newPaciente.grup_sang,
-      fact_sang: newPaciente.fact_sang,
-      historial: [],
-    };
+  const { alertSuccess, alertError } = useAlert();
 
-    if ((info.nombre != '') & (info.apellido != '') & (info.dni != '')) {
-      database.push(info);
-
-      setLocalStorageData(database);
-    } else {
-      setErr(true);
-    }
+  const handleClear = () => {
+    setNombre('');
+    setApellido('');
+    setDni('');
+    setTelefono('');
+    setDireccion('');
+    setMutual('');
+    setNumSocio('');
+    setGrupSang('');
+    setFactSang('');
   };
 
-  const HandleAdd = (isEnable) => {
-    const elemento = document.getElementsByName('add');
-    elemento[0].disabled = isEnable;
+  const handleNewPacient = (event) => {
+    event.preventDefault();
+    const newPacient = {
+      nombre: nombre,
+      apellido: apellido,
+      dni: dni,
+      telefono: telefono,
+      direccion: direccion,
+      mutual: mutual,
+      num_socio: numSocio,
+      grup_sang: grupSang,
+      fact_sang: factSang,
+    };
+
+    postNewPacient(newPacient)
+      .then(() => {
+        alertSuccess('Paciente creado correctamente');
+        handleClear();
+      })
+      .catch((err) => {
+        console.error(err);
+        alertError('Ha ocurrido un error. Intente nuevamente');
+      });
   };
 
   return (
-    <>
-      <FormContainer>
+    <AddPacientContainer>
+      <AddPacienteTitle>Ingresa los datos del nuevo paciente</AddPacienteTitle>
+      <FormContainer onSubmit={(e) => handleNewPacient(e)}>
         <PersonalInfoBody>
           <PersonalInfoGroup>
             <PersonalInfoType>Nombre</PersonalInfoType>
             <ModalInput
-              value={newPaciente.nombre}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  nombre: e.target.value,
-                }));
-                setIsEnable(false);
-                HandleAdd(isEnable);
-                setErr(false);
-              }}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Apellido</PersonalInfoType>
             <ModalInput
-              value={newPaciente.apellido}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  apellido: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dni</PersonalInfoType>
-            <ModalInput
-              value={newPaciente.dni}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  dni: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
-            />
+            <ModalInput value={dni} onChange={(e) => setDni(e.target.value)} />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Teléfono</PersonalInfoType>
             <ModalInput
-              value={newPaciente.telefono}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  telefono: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Dirección</PersonalInfoType>
             <ModalInput
-              value={newPaciente.direccion}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  direccion: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Mutual</PersonalInfoType>
             <ModalInput
-              value={newPaciente.mutual}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  mutual: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={mutual}
+              onChange={(e) => setMutual(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>N°</PersonalInfoType>
             <ModalInput
-              value={newPaciente.num_socio}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  num_socio: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={numSocio}
+              onChange={(e) => setNumSocio(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Grupo Sanguíneo</PersonalInfoType>
             <ModalInput
-              value={newPaciente.grup_sang}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  grup_sang: e.target.value,
-                }));
-                HandleAdd(false);
-                setErr(false);
-              }}
+              value={grupSang}
+              onChange={(e) => setGrupSang(e.target.value)}
             />
           </PersonalInfoGroup>
           <PersonalInfoGroup>
             <PersonalInfoType>Factor Sanguíneo</PersonalInfoType>
             <ModalInput
-              value={newPaciente.fact_sang}
-              onChange={(e) => {
-                setNewPaciente((prevState) => ({
-                  ...prevState,
-                  fact_sang: e.target.value,
-                })),
-                  HandleAdd(false);
-                setErr(false);
-              }}
+              value={factSang}
+              onChange={(e) => setFactSang(e.target.value)}
             />
           </PersonalInfoGroup>
-          <AddButton
-            name="add"
-            onClick={() => {
-              AddNewPaciente({ newPaciente }), HandleAdd(true);
-            }}
-          >
+          <AddButton disabled={!nombre || !apellido || !dni}>
             Agregar Paciente
           </AddButton>
-          {err && (
-            <>
-              <ErrorSpan>Ingreso Incorrecto</ErrorSpan>
-              <ErrorSpan>Nombre, Apellido y DNI son Requeridos</ErrorSpan>
-            </>
-          )}
         </PersonalInfoBody>
       </FormContainer>
-    </>
+    </AddPacientContainer>
   );
 };
 
 export default AddPaciente;
 
-const FormContainer = styled.div`
+const AddPacientContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const AddPacienteTitle = styled.h2`
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+
+const FormContainer = styled.form`
   display: flex;
   justify-content: space-between;
   padding: 16px;
-  margin: auto;
 `;
 
 const ModalInput = styled.input`
@@ -228,7 +166,7 @@ const PersonalInfoBody = styled.div`
   padding: 8px;
 `;
 
-const PersonalInfoGroup = styled.form`
+const PersonalInfoGroup = styled.div`
   display: flex;
 `;
 
@@ -260,6 +198,7 @@ const AddButton = styled.button`
 
   :disabled {
     opacity: 0.2;
+    pointer-events: none;
   }
 
   :hover {
@@ -271,11 +210,4 @@ const AddButton = styled.button`
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
-`;
-
-const ErrorSpan = styled.span`
-  display: flex;
-  margin: auto;
-  font-size: 16px;
-  color: gray;
 `;

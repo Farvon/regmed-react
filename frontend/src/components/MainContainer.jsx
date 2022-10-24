@@ -35,7 +35,7 @@ const MainContainer = () => {
           <StyledLink to="search">
             <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
           </StyledLink>
-          <StyledLink to="addNewPaciente">
+          <StyledLink to="add-pacient">
             <StyledButton onClick={() => handleClick()}>
               Agregar Paciente
             </StyledButton>
@@ -50,7 +50,7 @@ const MainContainer = () => {
             path="/search"
             element={<SearchResult dniPaciente={dni} />}
           ></Route>
-          <Route path="/addNewPaciente" element={<AddPaciente />}></Route>
+          <Route path="/add-pacient" element={<AddPaciente />}></Route>
           <Route
             path="/info"
             element={<InfoPaciente dniPaciente={dni} />}

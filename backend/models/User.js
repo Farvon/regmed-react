@@ -5,6 +5,8 @@ const userSchema = new Schema({
   username: { type: String, unique: true },
   name: String,
   password: String,
+  registration_number: { type: String, unique: true },
+  phone: String,
 });
 
 userSchema.set('toJSON', {

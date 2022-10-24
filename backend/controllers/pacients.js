@@ -46,9 +46,15 @@ pacientsRouter.post('/', userExtractor, (request, response) => {
     historial: pacient.historial,
   });
 
-  newPacient.save().then((savedPacient) => {
-    response.json(savedPacient);
-  });
+  newPacient
+    .save()
+    .then((savedPacient) => {
+      response.json(savedPacient);
+    })
+    .catch((err) => {
+      console.log(err);
+      response.status(400).end();
+    });
 });
 
 pacientsRouter.delete('/:dni', userExtractor, (request, response, next) => {
