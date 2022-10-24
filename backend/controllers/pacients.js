@@ -76,7 +76,7 @@ pacientsRouter.put(
     };
 
     Pacient.findOneAndUpdate(
-      dni,
+      { dni },
       { $push: { historial: newComment } },
       { new: true }
     )
