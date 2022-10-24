@@ -42,4 +42,22 @@ const postNewPacient = (newPacient) => {
   return request.then((response) => response.data);
 };
 
-export { getAllPacients, getPacientByDni, putPacientComment, postNewPacient };
+const editPacientInfo = (dni, newInfo) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = axios.put(`${baseUrl}/edit-info/${dni}`, newInfo, config);
+
+  return request.then((response) => response.data);
+};
+
+export {
+  getAllPacients,
+  getPacientByDni,
+  putPacientComment,
+  postNewPacient,
+  editPacientInfo,
+};

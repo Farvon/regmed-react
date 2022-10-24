@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  setLocalStorageData,
-  getLocalStorageData,
-} from '../services/localStorageUtils';
+import useAlert from '../hooks/useAlert';
+
+import { editPacientInfo } from '../services/pacients';
 
 const EditInfo = ({ paciente }) => {
-  const database = getLocalStorageData();
-
   const [pacienteEdited, setPacienteEdited] = useState({
-    id: paciente.id,
     nombre: paciente.nombre,
     apellido: paciente.apellido,
     dni: paciente.dni,
@@ -21,34 +17,23 @@ const EditInfo = ({ paciente }) => {
     fact_sang: paciente.fact_sang,
   });
 
-  const UpdateInfo = ({ pacienteEdited }) => {
-    const info = {
-      id: pacienteEdited.id,
-      nombre: pacienteEdited.nombre,
-      apellido: pacienteEdited.apellido,
-      dni: pacienteEdited.dni,
-      telefono: pacienteEdited.telefono,
-      direccion: pacienteEdited.direccion,
-      mutual: pacienteEdited.mutual,
-      num_socio: pacienteEdited.num_socio,
-      grup_sang: pacienteEdited.grup_sang,
-      fact_sang: pacienteEdited.fact_sang,
-      historial: paciente.historial,
-    };
+  const { alertSuccess, alertError } = useAlert();
 
-    const newDB = database.filter((item) => item.dni != info.dni);
-    newDB.push(info);
-    setLocalStorageData(newDB);
-  };
-
-  const HundleEnable = (isEnable) => {
-    const elemento = document.getElementsByName('edit');
-    elemento[0].disabled = isEnable;
+  const handleEditInfo = (event) => {
+    event.preventDefault();
+    editPacientInfo(pacienteEdited.dni, pacienteEdited)
+      .then(() => {
+        alertSuccess('Informacion actualizada correctamente');
+      })
+      .catch((err) => {
+        console.error(err);
+        alertError('Ha ocurrido un error. Intente nuevamente');
+      });
   };
 
   return (
     <>
-      <FormContainer>
+      <FormContainer onSubmit={(e) => handleEditInfo(e)}>
         <PersonalInfoBody>
           <PersonalInfoGroup>
             <PersonalInfoType>Nombre</PersonalInfoType>
@@ -59,7 +44,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   nombre: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -72,7 +56,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   apellido: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -89,7 +72,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   telefono: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -102,7 +84,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   direccion: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -115,7 +96,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   mutual: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -128,7 +108,6 @@ const EditInfo = ({ paciente }) => {
                   ...prevState,
                   num_socio: e.target.value,
                 }));
-                HundleEnable(false);
               }}
             />
           </PersonalInfoGroup>
@@ -140,8 +119,7 @@ const EditInfo = ({ paciente }) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   grup_sang: e.target.value,
-                })),
-                  HundleEnable(false);
+                }));
               }}
             />
           </PersonalInfoGroup>
@@ -153,20 +131,11 @@ const EditInfo = ({ paciente }) => {
                 setPacienteEdited((prevState) => ({
                   ...prevState,
                   fact_sang: e.target.value,
-                })),
-                  HundleEnable(false);
+                }));
               }}
             />
           </PersonalInfoGroup>
-
-          <EditButton
-            name="edit"
-            onClick={() => {
-              UpdateInfo({ pacienteEdited }), HundleEnable(true);
-            }}
-          >
-            Editar
-          </EditButton>
+          <EditButton>Editar</EditButton>
         </PersonalInfoBody>
       </FormContainer>
     </>
@@ -175,7 +144,7 @@ const EditInfo = ({ paciente }) => {
 
 export default EditInfo;
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   display: flex;
   justify-content: space-between;
   padding: 16px;
@@ -196,7 +165,7 @@ const PersonalInfoBody = styled.div`
   padding: 8px;
 `;
 
-const PersonalInfoGroup = styled.form`
+const PersonalInfoGroup = styled.div`
   display: flex;
 `;
 

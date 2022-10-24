@@ -96,4 +96,30 @@ pacientsRouter.put(
   }
 );
 
+pacientsRouter.put('/edit-info/:dni', userExtractor, (request, response) => {
+  const { dni } = request.params;
+  const info = request.body;
+
+  const newInfo = {
+    nombre: info.nombre,
+    apellido: info.apellido,
+    dni: info.dni,
+    telefono: info.telefono,
+    direccion: info.direccion,
+    mutual: info.mutual,
+    num_socio: info.num_socio,
+    grup_sang: info.grup_sang,
+    fact_sang: info.fact_sang,
+  };
+
+  Pacient.findOneAndUpdate({ dni }, newInfo, { new: true })
+    .then((result) => {
+      response.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      response.status(400).end();
+    });
+});
+
 module.exports = pacientsRouter;
