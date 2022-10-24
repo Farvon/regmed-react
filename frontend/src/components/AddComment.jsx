@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import useAlert from '../hooks/useAlert';
 import { putPacientComment } from '../services/pacients';
 
-const AddComment = ({ dniPaciente }) => {
+const AddComment = ({ dniPaciente, setShowModal }) => {
   const [medicalName, setMedicalName] = useState('');
   const [medicalBranch, setMedicalBranch] = useState('Rama Médica');
   const [medicalComment, setMedicalComment] = useState('');
+
+  const { alertSuccess, alertError } = useAlert();
 
   const handleAddNewComment = () => {
     const newCommet = {
@@ -14,7 +18,19 @@ const AddComment = ({ dniPaciente }) => {
       rama_hist: medicalBranch,
       comentario_hist: medicalComment,
     };
-    putPacientComment(dniPaciente, newCommet).then((res) => console.log(res));
+
+    putPacientComment(dniPaciente, newCommet)
+      .then(() => {
+        alertSuccess('Comentario guardado correctamente');
+        setMedicalName('');
+        setMedicalBranch('');
+        setMedicalComment('');
+        setShowModal(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        alertError('Ha ocurrido un error. Intente nuevamente');
+      });
   };
 
   return (
@@ -33,7 +49,6 @@ const AddComment = ({ dniPaciente }) => {
             onChange={(e) => {
               setMedicalBranch(e.target.value);
             }}
-            placeholder="Rama Médica"
           >
             <option disabled>Rama Médica</option>
             <option value="Cardiologia">Cardiologia</option>
@@ -114,11 +129,4 @@ const AddCommentButton = styled.button`
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
-`;
-
-const ErrorSpan = styled.span`
-  display: flex;
-  margin: auto;
-  font-size: 16px;
-  color: gray;
 `;
