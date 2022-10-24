@@ -9,7 +9,7 @@ const AddComment = ({ dniPaciente }) => {
 
   const handleAddNewComment = () => {
     const newCommet = {
-      fecha_hist: new Date().toDateString,
+      fecha_hist: new Date().toDateString(),
       medico_hist: medicalName,
       rama_hist: medicalBranch,
       comentario_hist: medicalComment,
