@@ -8,14 +8,15 @@ usersRouter.get('/', async (request, response) => {
 });
 
 usersRouter.post('/', async (request, response) => {
-  const { username, name, password } = request.body;
+  const { username, password, name, registration_number } = request.body;
 
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = new User({
     username,
-    name,
     password: passwordHash,
+    name,
+    registration_number,
   });
 
   try {

@@ -6,7 +6,6 @@ const userSchema = new Schema({
   name: String,
   password: String,
   registration_number: { type: String, unique: true },
-  phone: String,
 });
 
 userSchema.set('toJSON', {

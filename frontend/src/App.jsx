@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import HeaderComponent from './components/HeaderComponent';
 import MainContainer from './components/MainContainer';
-import Login from './components/Login';
+import UserLogin from './components/UserLogin';
 
 const App = () => {
   const [user, setUser] = useState();
@@ -35,7 +35,7 @@ const App = () => {
               </>
             ) : (
               <>
-                <Login setUser={setUser} />
+                <UserLogin setUser={setUser} />
                 <ToastContainer />
               </>
             )
