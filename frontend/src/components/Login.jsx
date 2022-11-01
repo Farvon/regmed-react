@@ -6,6 +6,7 @@ import useAlert from '../hooks/useAlert';
 import { login } from '../services/login';
 import ButtonLink from './ButtonLink';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import { ILogo } from '../assets/icons/logo';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -30,7 +31,7 @@ const Login = ({ setUser }) => {
   return (
     <LoginContainer>
       <FormContainer>
-        <MonitorHeartIcon
+        {/* <MonitorHeartIcon
           sx={{
             display: { xs: 'flex' },
             margin: 'auto',
@@ -39,7 +40,10 @@ const Login = ({ setUser }) => {
             fontSize: '800%',
             opacity: '0.4',
           }}
-        />
+        /> */}
+        <LogoContainer>
+          <ILogo />
+        </LogoContainer>
         <LoginForm onSubmit={(e) => handleLogin(e)}>
           <LoginInput
             type="text"
@@ -90,6 +94,13 @@ const FormContainer = styled.div`
   padding: 10px;
 
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 150px;
 `;
 
 const LoginForm = styled.form`

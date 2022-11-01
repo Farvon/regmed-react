@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import Typography from '@mui/material/Typography';
+
+import { ILogo } from '../assets/icons/logo';
 
 const Welcome = () => {
   return (
@@ -11,31 +11,10 @@ const Welcome = () => {
         <InfoBody>
           Utiliza el buscador para encontrar a un paciente por su DNI
         </InfoBody>
-        <MonitorHeartIcon
-          sx={{
-            display: { xs: 'flex' },
-            margin: 'auto',
-            marginTop: '0px',
-            fontSize: '400px',
-            opacity: '0.2',
-          }}
-        />
-        <Typography
-          variant="h1"
-          sx={{
-            display: { xs: 'flex' },
-            margin: 'auto',
-            marginTop: '-300px',
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-            opacity: '0.2',
-          }}
-        >
-          RegMed
-        </Typography>
+        <BackgroundLogo>
+          <ILogo />
+          <Span>RegMed</Span>
+        </BackgroundLogo>
       </InfoContainer>
     </Contenedor>
   );
@@ -68,4 +47,19 @@ const InfoBody = styled.h3`
   text-align: center;
   margin-top: 32px;
   margin-bottom: 0px;
+`;
+
+const BackgroundLogo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.2;
+`;
+
+const Span = styled.span`
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 5px;
+  font-weight: 500;
+  font-size: 3em;
+  opacity: 0.5;
 `;

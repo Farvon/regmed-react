@@ -12,7 +12,7 @@ import ButtonLink from './ButtonLink';
 const InfoPaciente = ({ dniPaciente }) => {
   const [paciente, setPaciente] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [commentsPerPage] = useState(3);
+  const [commentsPerPage] = useState(2);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [modalTitle, setModalTitle] = useState();
@@ -174,7 +174,6 @@ export default InfoPaciente;
 const Contenedor = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
 `;
 
 const InfoContainer = styled.div`
@@ -192,10 +191,6 @@ const PersonalInfoContainer = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   margin: 16px;
-
-  .comments {
-    flex: 2;
-  }
 `;
 
 const PersonalInfoHeader = styled.div`
@@ -236,7 +231,6 @@ const PersonalInfoData = styled.span`
 `;
 
 const CommentContainer = styled.div`
-  height: 110px;
   border: solid 1px lightgray;
   box-shadow: 0 1px 1px black;
   padding: 8px;
@@ -321,7 +315,6 @@ const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
 `;
 
 const InfoTitle = styled.h2`
