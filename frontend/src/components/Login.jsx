@@ -20,6 +20,7 @@ const Login = ({ setUser }) => {
       .then((response) => {
         localStorage.setItem('loggedRegMedUser', JSON.stringify(response));
         setUser(response);
+        window.location.href = '/';
       })
       .catch((err) => {
         console.error(err);
@@ -63,7 +64,7 @@ const Login = ({ setUser }) => {
         <div>
           <span>Todavia no estas registrado? </span>
           <ButtonLink fontSize="16px">
-            <Link to="add-user">Click aca</Link>
+            <Link to="sign-up">Click aca</Link>
           </ButtonLink>
         </div>
       </FormContainer>

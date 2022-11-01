@@ -5,7 +5,7 @@ import useAlert from '../hooks/useAlert';
 import { registerNewUser } from '../services/users';
 import { ILogo } from '../assets/icons/logo';
 
-const AddUser = () => {
+const SignUp = () => {
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +24,9 @@ const AddUser = () => {
 
     registerNewUser(newUser)
       .then((res) => {
-        alertSuccess('Usuario creado correctamente');
+        alertSuccess(
+          'Usuario creado correctamente. Contacte con el adminitrador para habilitar su cuenta'
+        );
         setTimeout(() => {
           window.location.href = '/';
         }, 5000);
@@ -77,7 +79,7 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default SignUp;
 
 const NewUserContainer = styled.div`
   display: flex;
