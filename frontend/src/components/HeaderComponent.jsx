@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import styled from 'styled-components';
+
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
-const settings = ['Profile', 'Logout'];
+import { ILogo } from '../assets/icons/logo';
+const settings = ['Logout'];
 
 const HeaderComponent = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -26,28 +22,17 @@ const HeaderComponent = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="2560px" sx={{ backgroundColor: '#3DADC5' }}>
+    <AppBar>
+      <Container>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <MonitorHeartIcon sx={{ display: { xs: 'flex' }, mr: 1 }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                display: { xs: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              RegMed
-            </Typography>
-          </Box>
+          <Anchor href="/">
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <ILogoContainer>
+                <ILogo />
+              </ILogoContainer>
+              <Span>RegMed</Span>
+            </Box>
+          </Anchor>
 
           <Box>
             {/* Avatar */}
@@ -76,7 +61,7 @@ const HeaderComponent = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <span>{setting}</span>
                 </MenuItem>
               ))}
             </Menu>
@@ -87,3 +72,46 @@ const HeaderComponent = () => {
   );
 };
 export default HeaderComponent;
+
+const AppBar = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  width: 2560px;
+  background-color: #3dadc5;
+  padding 0 40px;
+`;
+
+const Anchor = styled.a`
+  text-decoration: none;
+`;
+
+const Box = styled.div`
+  display: flex;
+  align-items: center;
+  height: 64px;
+`;
+
+const Toolbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ILogoContainer = styled.div`
+  display: flex;
+  width: 32px;
+  margin-right: 10px;
+  opacity: 0.7;
+`;
+
+const Span = styled.span`
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 5px;
+  font-weight: 500;
+  color: white;
+`;

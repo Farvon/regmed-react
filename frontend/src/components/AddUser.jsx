@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import useAlert from '../hooks/useAlert';
 import { registerNewUser } from '../services/users';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import { ILogo } from '../assets/icons/logo';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
@@ -38,16 +38,9 @@ const AddUser = () => {
   return (
     <NewUserContainer>
       <FormContainer>
-        <MonitorHeartIcon
-          sx={{
-            display: { xs: 'flex' },
-            margin: 'auto',
-            marginTop: '-40px',
-            marginBottom: '40px',
-            fontSize: '800%',
-            opacity: '0.4',
-          }}
-        />
+        <LogoContainer>
+          <ILogo />
+        </LogoContainer>
         <LoginForm onSubmit={(e) => handleNewUser(e)}>
           <LoginInput
             type="text"
@@ -99,7 +92,7 @@ const NewUserContainer = styled.div`
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 50%;
+  height: 60%;
   background-color: #fff;
   border-radius: 20px;
   justify-content: center;
@@ -109,11 +102,19 @@ const FormContainer = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 150px;
+  margin-bottom: 50px;
+`;
+
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 20vw;
-  height: 200px;
+  height: 50%;
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -126,6 +127,7 @@ const LoginInput = styled.input`
   margin: 8px;
   border: 2px solid lightgray;
   border-radius: 10px;
+  width: 80%;
 `;
 
 const LoginButton = styled.button`
@@ -133,10 +135,10 @@ const LoginButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 13vw;
-  margin: 16px auto 0;
+  margin: 16px auto;
   color: white;
   padding: 12px 24px 12px 24px;
-  font-size: 18px;
+  font-size: 1em;
   border-radius: 8px;
   background: #3498db;
   background-image: linear-gradient(to bottom, #3498db, #2980b9);
