@@ -85,6 +85,8 @@ const LoginContainer = styled.div`
 
 const FormContainer = styled.div`
   display: flex;
+  height: 50vh;
+  min-height: 300px;
   flex-direction: column;
   background-color: #fff;
   border-radius: 20px;
@@ -99,7 +101,8 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   width: 50%;
-  height: 150px;
+  height: 15vh;
+  min-height: 80px;
 `;
 
 const LoginForm = styled.form`

@@ -91,8 +91,10 @@ const NewUserContainer = styled.div`
 
 const FormContainer = styled.div`
   display: flex;
+  min-width: 250px;
   flex-direction: column;
   height: 60%;
+  min-height: 400px;
   background-color: #fff;
   border-radius: 20px;
   justify-content: center;
@@ -106,7 +108,8 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   width: 50%;
-  height: 150px;
+  height: 15vh;
+  min-height: 100px;
   margin-bottom: 50px;
 `;
 
@@ -128,17 +131,19 @@ const LoginInput = styled.input`
   border: 2px solid lightgray;
   border-radius: 10px;
   width: 80%;
+  min-width: 150px;
 `;
 
 const LoginButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 13vw;
+  min-width: 13vw;
+
   margin: 16px auto;
   color: white;
   padding: 12px 24px 12px 24px;
-  font-size: 1em;
+  font-size: 0.8em;
   border-radius: 8px;
   background: #3498db;
   background-image: linear-gradient(to bottom, #3498db, #2980b9);
