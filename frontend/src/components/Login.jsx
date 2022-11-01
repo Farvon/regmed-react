@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import { login } from '../services/login';
 import ButtonLink from './ButtonLink';
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import { ILogo } from '../assets/icons/logo';
 
 const Login = ({ setUser }) => {
@@ -41,16 +40,6 @@ const Login = ({ setUser }) => {
   return (
     <LoginContainer>
       <FormContainer>
-        {/* <MonitorHeartIcon
-          sx={{
-            display: { xs: 'flex' },
-            margin: 'auto',
-            marginTop: '0px',
-            marginBottom: '-10px',
-            fontSize: '800%',
-            opacity: '0.4',
-          }}
-        /> */}
         <LogoContainer>
           <ILogo />
         </LogoContainer>
