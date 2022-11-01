@@ -15,7 +15,7 @@ const UnauthRouter = ({ setUser }) => {
         element={<Login setUser={setUser} />}
         exact
       />
-      <Route path="/sign-up" name="SignUp" element={<SignUp />} exact />
+      <Route path="/login/sign-up" name="SignUp" element={<SignUp />} exact />
     </Routes>
   );
 };

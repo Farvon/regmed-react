@@ -9,11 +9,9 @@ const ButtonLink = ({ children, fontSize, onClick }) => {
   };
 
   return (
-    <>
-      <StyledButton fontSize={fontSize} onClick={(e) => handleClick(e)}>
-        {children}
-      </StyledButton>
-    </>
+    <StyledButton fontSize={fontSize} onClick={(e) => handleClick(e)}>
+      {children}
+    </StyledButton>
   );
 };
 

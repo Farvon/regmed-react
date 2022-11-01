@@ -41,7 +41,7 @@ const Login = ({ setUser }) => {
   return (
     <LoginContainer>
       <FormContainer>
-        <LogoContainer>
+        <LogoContainer to="/">
           <ILogo />
         </LogoContainer>
         <LoginForm onSubmit={(e) => handleLogin(e)}>
@@ -64,7 +64,7 @@ const Login = ({ setUser }) => {
         <div>
           <span>Todavia no estas registrado? </span>
           <ButtonLink fontSize="16px">
-            <Link to="sign-up">Click aca</Link>
+            <StyledLink to="sign-up">Click aca</StyledLink>
           </ButtonLink>
         </div>
       </FormContainer>
@@ -98,7 +98,7 @@ const FormContainer = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   display: flex;
   align-items: center;
   width: 50%;
@@ -155,4 +155,8 @@ const LoginButton = styled.button`
     background: #3498db;
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
+`;
+
+const StyledLink = styled(Link)`
+  all: unset;
 `;
