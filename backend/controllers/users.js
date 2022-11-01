@@ -8,7 +8,7 @@ usersRouter.get('/', async (request, response) => {
 });
 
 usersRouter.post('/', async (request, response) => {
-  const { username, password, name, registration_number } = request.body;
+  const { username, password, name, registration_number, type } = request.body;
 
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -17,6 +17,8 @@ usersRouter.post('/', async (request, response) => {
     password: passwordHash,
     name,
     registration_number,
+    type,
+    enabled: false,
   });
 
   try {
@@ -25,6 +27,22 @@ usersRouter.post('/', async (request, response) => {
   } catch (err) {
     console.log(err);
     response.status(400).end();
+  }
+});
+
+usersRouter.put('/:username', async (request, response) => {
+  const { username } = request.params;
+
+  try {
+    const userUpdated = await User.findOneAndUpdate(
+      { username },
+      { enabled: true },
+      { new: true }
+    );
+    response.json(userUpdated);
+  } catch (err) {
+    console.log(err);
+    response.status(404).end();
   }
 });
 

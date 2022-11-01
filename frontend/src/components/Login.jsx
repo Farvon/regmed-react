@@ -23,7 +23,17 @@ const Login = ({ setUser }) => {
       })
       .catch((err) => {
         console.error(err);
-        alertError('Ha ocurrido un error. Intente nuevamente');
+        const errorCode = err.response.status;
+        switch (errorCode) {
+          case 401:
+            alertError('Usuario o contraseña invalidos');
+            break;
+          case 403:
+            alertError('Usuario deshabilitado. Contacte con el administrador');
+            break;
+          default:
+            alertError('Ha ocurrido un error. Intente nuevamante');
+        }
       });
   };
 

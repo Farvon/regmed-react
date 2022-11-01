@@ -3,9 +3,11 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new Schema({
   username: { type: String, unique: true },
-  name: String,
   password: String,
-  registration_number: { type: String, unique: true },
+  name: String,
+  registration_number: String,
+  type: String,
+  enabled: Boolean,
 });
 
 userSchema.set('toJSON', {

@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import HeaderComponent from './components/HeaderComponent';
 import MainContainer from './components/MainContainer';
 import UserLogin from './components/UserLogin';
+import AdminContainer from './components/AdminContainer';
 
 const App = () => {
   const [user, setUser] = useState();
@@ -27,7 +28,13 @@ const App = () => {
           exact
           path="*"
           element={
-            user ? (
+            user && user.username === 'admin' ? (
+              <>
+                <HeaderComponent user={user} />
+                <AdminContainer user={user} />
+                <ToastContainer />
+              </>
+            ) : user ? (
               <>
                 <HeaderComponent user={user} />
                 <MainContainer user={user} />

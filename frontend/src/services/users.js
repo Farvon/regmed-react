@@ -6,3 +6,15 @@ export const registerNewUser = async (newUser) => {
 
   return request.then((response) => response.data);
 };
+
+export const getUsers = () => {
+  const request = axios.get(baseUrl);
+
+  return request.then((response) => response.data);
+};
+
+export const enableUser = (username) => {
+  const request = axios.put(`${baseUrl}/${username}`);
+
+  return request.then((response) => response.data);
+};

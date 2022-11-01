@@ -9,8 +9,16 @@ loginRouter.post('/', async (request, response) => {
 
   const user = await User.findOne({ username });
 
+  const isEnabled = user === null ? false : user.enabled;
+
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.password);
+
+  if (!isEnabled) {
+    return response.status(403).json({
+      error: 'User disabled',
+    });
+  }
 
   if (!user || !passwordCorrect) {
     return response.status(401).json({
