@@ -21,6 +21,12 @@ const HeaderComponent = () => {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    console.log('logout');
+    localStorage.removeItem('loggedRegMedUser');
+    window.location.href = '/';
+  };
+
   return (
     <AppBar>
       <Container>
@@ -61,7 +67,7 @@ const HeaderComponent = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <span>{setting}</span>
+                  <span onClick={() => handleLogout()}>{setting}</span>
                 </MenuItem>
               ))}
             </Menu>

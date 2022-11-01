@@ -53,7 +53,7 @@ const Login = ({ setUser }) => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <LoginInput
-            type="text"
+            type="password"
             value={password}
             name="Password"
             placeholder="Password"
@@ -61,10 +61,11 @@ const Login = ({ setUser }) => {
           />
           <LoginButton>Login</LoginButton>
         </LoginForm>
+        <LoginButton>Ingresa como invitado</LoginButton>
         <div>
           <span>Todavia no estas registrado? </span>
           <ButtonLink fontSize="16px">
-            <StyledLink to="sign-up">Click aca</StyledLink>
+            <StyledLink to="sign-up">Sign up</StyledLink>
           </ButtonLink>
         </div>
       </FormContainer>
@@ -86,16 +87,15 @@ const LoginContainer = styled.div`
 
 const FormContainer = styled.div`
   display: flex;
-  height: 50vh;
-  min-height: 300px;
   flex-direction: column;
-  background-color: #fff;
-  border-radius: 20px;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-
+  height: 50vh;
+  min-height: 300px;
+  background-color: #fff;
+  border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 16px;
 `;
 
 const LogoContainer = styled(Link)`
@@ -109,18 +109,18 @@ const LogoContainer = styled(Link)`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 20vw;
-  height: 200px;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  padding-top: 0;
+  width: 20vw;
+  height: 200px;
 `;
 
 const LoginInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
   font-size: 16px;
   padding: 8px;
-  margin: 8px;
+  margin-bottom: 16px;
   border: 2px solid lightgray;
   border-radius: 10px;
 `;
@@ -129,8 +129,7 @@ const LoginButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 13vw;
-  margin: 16px auto 0;
+  width: 100%;
   color: white;
   padding: 12px 24px 12px 24px;
   font-size: 18px;
