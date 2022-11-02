@@ -30,24 +30,20 @@ const AdminContainer = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {users &&
-              users.map((user, idx) => (
-                // <UsersContainer key={idx}>
-                <>
-                  <td>{user.username}</td>
-                  <td>{user.name}</td>
-                  <td>
-                    <EnableButton
-                      onClick={() => handleEnableUser(user.username)}
-                    >
-                      Habilitar
-                    </EnableButton>
-                  </td>
-                </>
-                // </UsersContainer>
-              ))}
-          </tr>
+          {users &&
+            users.map((user, idx) => (
+              // <UsersContainer key={idx}>
+              <tr>
+                <td>{user.username}</td>
+                <td>{user.name}</td>
+                <td>
+                  <EnableButton onClick={() => handleEnableUser(user.username)}>
+                    Habilitar
+                  </EnableButton>
+                </td>
+              </tr>
+              // </UsersContainer>
+            ))}
         </tbody>
       </Table>
     </PageContainer>
@@ -92,6 +88,7 @@ const Table = styled.table`
     width: 33%;
     padding: 10px;
     border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     :last-child {
       border-right: 1px solid lightgray;
     }
