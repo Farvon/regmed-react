@@ -13,9 +13,13 @@ const Login = ({ setUser }) => {
 
   const { alertError } = useAlert();
 
-  const handleLogin = (event) => {
+  const handleLogin = (event, type) => {
     event.preventDefault();
-    const credentials = { username, password };
+    const credentials =
+      type === 'guest'
+        ? { username: 'guest', password: 'guest' }
+        : { username, password };
+
     login(credentials)
       .then((response) => {
         localStorage.setItem('loggedRegMedUser', JSON.stringify(response));
@@ -38,19 +42,13 @@ const Login = ({ setUser }) => {
       });
   };
 
-  const handleGuestLogin = (e) => {
-    setUsername('guest');
-    setPassword('guest');
-    handleLogin(e);
-  };
-
   return (
     <LoginContainer>
       <FormContainer>
         <LogoContainer to="/">
           <ILogo />
         </LogoContainer>
-        <LoginForm onSubmit={(e) => handleLogin(e)}>
+        <LoginForm onSubmit={(e) => handleLogin(e, 'user')}>
           <LoginInput
             type="text"
             value={username}
@@ -67,7 +65,7 @@ const Login = ({ setUser }) => {
           />
           <LoginButton>Login</LoginButton>
         </LoginForm>
-        <LoginButton onClick={(e) => handleGuestLogin(e)}>
+        <LoginButton onClick={(e) => handleLogin(e, 'guest')}>
           Ingresar como invitado
         </LoginButton>
         <div>
