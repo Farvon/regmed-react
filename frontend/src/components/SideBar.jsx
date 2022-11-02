@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -26,12 +26,12 @@ const SideBar = ({ setDni, user }) => {
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
         />
-        <StyledLink to="/search">
+        <StyledLink disabled={!userInput} to="/search">
           <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
         </StyledLink>
         {user && user.username !== 'guest' && (
           <StyledLink to="/add-pacient">
-            <StyledButton onClick={() => handleClick()}>
+            <StyledButton onClick={() => setUserInput('')}>
               Agregar Paciente
             </StyledButton>
           </StyledLink>
@@ -62,6 +62,13 @@ const InputBuscador = styled.input`
 const StyledLink = styled(Link)`
   display: flex;
   text-decoration: none;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.2;
+    `}
 `;
 
 const StyledButton = styled.button`

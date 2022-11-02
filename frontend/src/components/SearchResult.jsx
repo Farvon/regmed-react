@@ -7,10 +7,11 @@ import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
 
 const SearchResult = ({ dni, setDni, user }) => {
-  const [paciente, setPaciente] = useState([]);
+  const [paciente, setPaciente] = useState();
+  const [errorMsg, setErrorMsg] = useState();
 
   useEffect(() => {
-    getPacientByDni(dni).then((paciente) => setPaciente(paciente));
+    dni && getPacientByDni(dni).then((paciente) => setPaciente(paciente));
   }, [dni]);
 
   return (
