@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getPacientByDni } from '../services/pacients';
 import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
+import { ILogo } from '../assets/icons/logo';
 
 const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState();
@@ -48,7 +49,13 @@ const SearchResult = ({ dni, setDni, user }) => {
             </ResultadoContainer>
           </>
         ) : (
-          <InfoTitle>Ups, parece que no hay nadie con ese DNI.</InfoTitle>
+          <>
+            <InfoTitle>Ups, parece que no hay nadie con ese DNI.</InfoTitle>
+            <BackgroundLogo>
+              <ILogo />
+              <Span>RegMed</Span>
+            </BackgroundLogo>
+          </>
         )}
       </InfoContainer>
     </PageContainer>
@@ -70,7 +77,7 @@ const InfoContainer = styled.div`
 const InfoTitle = styled.h2`
   width: 100%;
   text-align: center;
-  margin: 16px 0px 0px 0px;
+  margin: 36px 0px 0px 0px;
 `;
 
 const ResultadoContainer = styled.div`
@@ -126,4 +133,23 @@ const Td = styled.td`
   :last-child {
     border-right: none;
   }
+`;
+
+const BackgroundLogo = styled.div`
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.2;
+  width: 200px;
+  margin-top: 10vh;
+`;
+
+const Span = styled.span`
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 5px;
+  font-weight: 500;
+  font-size: 3em;
+  opacity: 0.5;
 `;

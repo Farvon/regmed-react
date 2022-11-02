@@ -37,11 +37,8 @@ const AddComment = ({ dni, name, setShowModal }) => {
     <>
       <FormContainer>
         <FormInfo>
-          <ModalInput
-            value={medicalName}
-            onChange={(e) => setMedicalName(e.target.value)}
-            placeholder="Médico"
-          />
+          <span>Médico:</span>
+          <MedicName>{name}</MedicName>
         </FormInfo>
         <FormInfo>
           <select
@@ -51,8 +48,11 @@ const AddComment = ({ dni, name, setShowModal }) => {
             }}
           >
             <option disabled>Rama Médica</option>
-            <option value="Cardiologia">Cardiologia</option>
-            <option value="Medicina General">Medicina General</option>
+            {ramas.map((item, index) => (
+              <option value={item.value} key={index}>
+                {item.value}
+              </option>
+            ))}
           </select>
         </FormInfo>
       </FormContainer>
@@ -87,10 +87,18 @@ const FormContainer = styled.div`
 const FormInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  span:first-child {
+    font-size: 14px;
+  }
 `;
 
-const ModalInput = styled.input`
-  width: 100%;
+const MedicName = styled.span`
+  margin-left: 4px;
+  color: gray;
+  font-weight: bold;
+  font-style: italic;
 `;
 
 const ModalComment = styled.textarea`
@@ -130,3 +138,16 @@ const AddCommentButton = styled.button`
     background-image: linear-gradient(to bottom, #3498db, #2980b9);
   }
 `;
+
+const ramas = [
+  { value: 'Medicina General' },
+  { value: 'Cardiología' },
+  { value: 'Neurología' },
+  { value: 'Traumatología' },
+  { value: 'Endocrinología' },
+  { value: 'Alergología' },
+  { value: 'Ginecología' },
+  { value: 'Urología' },
+  { value: 'Neumología' },
+  { value: 'Otorrinolaringología' },
+];

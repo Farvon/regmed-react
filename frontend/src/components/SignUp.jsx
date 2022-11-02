@@ -52,7 +52,7 @@ const SignUp = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <LoginInput
-            type="text"
+            type="password"
             value={password}
             name="password"
             placeholder="Password"

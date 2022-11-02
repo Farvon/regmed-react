@@ -57,6 +57,7 @@ const BackgroundLogo = styled.div`
   align-items: center;
   opacity: 0.2;
   width: 200px;
+  margin-top: 10vh;
 `;
 
 const Span = styled.span`

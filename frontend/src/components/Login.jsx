@@ -66,7 +66,7 @@ const Login = ({ setUser }) => {
           <LoginButton>Login</LoginButton>
         </LoginForm>
         <LoginButton onClick={(e) => handleLogin(e, 'guest')}>
-          Ingresar como invitado
+          Ingresar como Paciente
         </LoginButton>
         <div>
           <span>Todavia no estas registrado? </span>

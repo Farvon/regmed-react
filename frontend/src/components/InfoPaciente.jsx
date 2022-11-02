@@ -92,7 +92,7 @@ const InfoPaciente = ({ dni, setDni, user }) => {
 
             <PersonalInfoContainer className="comments">
               <PersonalInfoHeader>
-                <PersonalInfoTitle>Comentarios</PersonalInfoTitle>
+                <PersonalInfoTitle>Historial</PersonalInfoTitle>
               </PersonalInfoHeader>
               <CommentBodyContainer>
                 {currentComments.map((item, idx) => (
