@@ -31,7 +31,7 @@ const AuthRouter = () => {
               {user && user.username === 'admin' ? (
                 <AdminContainer />
               ) : (
-                <WelcomePage setDni={setDni} />
+                <WelcomePage setDni={setDni} user={user} />
               )}
             </>
           }
@@ -42,7 +42,7 @@ const AuthRouter = () => {
           name="search"
           element={
             <>
-              <SearchResult dni={dni} setDni={setDni} />
+              <SearchResult dni={dni} setDni={setDni} user={user} />
             </>
           }
           exact
@@ -52,7 +52,7 @@ const AuthRouter = () => {
           name="info"
           element={
             <>
-              <InfoPaciente dni={dni} setDni={setDni} />
+              <InfoPaciente dni={dni} setDni={setDni} user={user} />
             </>
           }
           exact

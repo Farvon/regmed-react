@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Welcome from './Welcome';
 import SideBar from './SideBar';
 
-const WelcomePage = ({ setDni }) => {
+const WelcomePage = ({ setDni, user }) => {
   return (
     <PageContainer id="page-container">
-      <SideBar setDni={setDni} />
+      <SideBar setDni={setDni} user={user} />
       <SectionContainer>
         <Welcome />
       </SectionContainer>

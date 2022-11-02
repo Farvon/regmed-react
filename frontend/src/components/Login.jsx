@@ -38,6 +38,12 @@ const Login = ({ setUser }) => {
       });
   };
 
+  const handleGuestLogin = (e) => {
+    setUsername('guest');
+    setPassword('guest');
+    handleLogin(e);
+  };
+
   return (
     <LoginContainer>
       <FormContainer>
@@ -61,7 +67,9 @@ const Login = ({ setUser }) => {
           />
           <LoginButton>Login</LoginButton>
         </LoginForm>
-        <LoginButton>Ingresar como invitado</LoginButton>
+        <LoginButton onClick={(e) => handleGuestLogin(e)}>
+          Ingresar como invitado
+        </LoginButton>
         <div>
           <span>Todavia no estas registrado? </span>
           <ButtonLink fontSize="16px">

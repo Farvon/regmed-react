@@ -10,7 +10,7 @@ import AddComment from './AddComment';
 import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
 
-const InfoPaciente = ({ dni, setDni }) => {
+const InfoPaciente = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(2);
@@ -35,23 +35,25 @@ const InfoPaciente = ({ dni, setDni }) => {
 
   return (
     <PageContainer>
-      <SideBar setDni={setDni} />
+      <SideBar setDni={setDni} user={user} />
       <InfoContainer>
         {paciente && paciente.length !== 0 ? (
           <>
             <PersonalInfoContainer>
               <PersonalInfoHeader>
                 <PersonalInfoTitle>Información Personal</PersonalInfoTitle>
-                <ButtonLink
-                  fontSize="16px"
-                  onClick={() => {
-                    setShowModal(true);
-                    setModalContent(<EditInfo paciente={paciente} />);
-                    setModalTitle('Editar Información Personal');
-                  }}
-                >
-                  Edit
-                </ButtonLink>
+                {user && user.username !== 'guest' && (
+                  <ButtonLink
+                    fontSize="16px"
+                    onClick={() => {
+                      setShowModal(true);
+                      setModalContent(<EditInfo paciente={paciente} />);
+                      setModalTitle('Editar Información Personal');
+                    }}
+                  >
+                    Edit
+                  </ButtonLink>
+                )}
               </PersonalInfoHeader>
               <PersonalInfoBody>
                 <PersonalInfoGroup>
@@ -129,18 +131,19 @@ const InfoPaciente = ({ dni, setDni }) => {
                     </ViewCommentBottonContainer>
                   </CommentContainer>
                 ))}
-
-                <AddCommentButton
-                  onClick={() => {
-                    setShowModal(true);
-                    setModalContent(
-                      <AddComment dni={dni} setShowModal={setShowModal} />
-                    );
-                    setModalTitle('Agregar Comentario');
-                  }}
-                >
-                  Agregar Comentario
-                </AddCommentButton>
+                {user && user.username !== 'guest' && (
+                  <AddCommentButton
+                    onClick={() => {
+                      setShowModal(true);
+                      setModalContent(
+                        <AddComment dni={dni} setShowModal={setShowModal} />
+                      );
+                      setModalTitle('Agregar Comentario');
+                    }}
+                  >
+                    Agregar Comentario
+                  </AddCommentButton>
+                )}
               </CommentBodyContainer>
             </PersonalInfoContainer>
             {showModal ? (

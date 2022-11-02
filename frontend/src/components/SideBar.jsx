@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
-const SideBar = ({ setDni }) => {
+const SideBar = ({ setDni, user }) => {
   const [userInput, setUserInput] = useState('');
 
   const handleClick = () => {
@@ -29,11 +29,13 @@ const SideBar = ({ setDni }) => {
         <StyledLink to="/search">
           <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
         </StyledLink>
-        <StyledLink to="/add-pacient">
-          <StyledButton onClick={() => handleClick()}>
-            Agregar Paciente
-          </StyledButton>
-        </StyledLink>
+        {user && user.username !== 'guest' && (
+          <StyledLink to="/add-pacient">
+            <StyledButton onClick={() => handleClick()}>
+              Agregar Paciente
+            </StyledButton>
+          </StyledLink>
+        )}
       </Box>
     </SideContainer>
   );

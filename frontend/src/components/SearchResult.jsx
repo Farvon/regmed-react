@@ -6,7 +6,7 @@ import { getPacientByDni } from '../services/pacients';
 import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
 
-const SearchResult = ({ dni, setDni }) => {
+const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const SearchResult = ({ dni, setDni }) => {
 
   return (
     <PageContainer>
-      <SideBar setDni={setDni} />
+      <SideBar setDni={setDni} user={user} />
       <InfoContainer>
         {paciente ? (
           <>
