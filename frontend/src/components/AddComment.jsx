@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import useAlert from '../hooks/useAlert';
 import { putPacientComment } from '../services/pacients';
 
-const AddComment = ({ dni, setShowModal }) => {
-  const [medicalName, setMedicalName] = useState('');
+const AddComment = ({ dni, name, setShowModal }) => {
+  const [medicalName, setMedicalName] = useState(name);
   const [medicalBranch, setMedicalBranch] = useState('Rama Médica');
   const [medicalComment, setMedicalComment] = useState('');
 
