@@ -31,6 +31,7 @@ const Contenedor = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   background: #f4f6f5;
 `;
@@ -52,8 +53,10 @@ const InfoBody = styled.h3`
 const BackgroundLogo = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   opacity: 0.2;
+  width: 200px;
 `;
 
 const Span = styled.span`

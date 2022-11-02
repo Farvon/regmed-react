@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useAlert from '../hooks/useAlert';
 import { putPacientComment } from '../services/pacients';
 
-const AddComment = ({ dniPaciente, setShowModal }) => {
+const AddComment = ({ dni, setShowModal }) => {
   const [medicalName, setMedicalName] = useState('');
   const [medicalBranch, setMedicalBranch] = useState('Rama Médica');
   const [medicalComment, setMedicalComment] = useState('');
@@ -19,7 +19,7 @@ const AddComment = ({ dniPaciente, setShowModal }) => {
       comentario_hist: medicalComment,
     };
 
-    putPacientComment(dniPaciente, newCommet)
+    putPacientComment(dni, newCommet)
       .then(() => {
         alertSuccess('Comentario guardado correctamente');
         setMedicalName('');

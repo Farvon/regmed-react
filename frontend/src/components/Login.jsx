@@ -61,7 +61,7 @@ const Login = ({ setUser }) => {
           />
           <LoginButton>Login</LoginButton>
         </LoginForm>
-        <LoginButton>Ingresa como invitado</LoginButton>
+        <LoginButton>Ingresar como invitado</LoginButton>
         <div>
           <span>Todavia no estas registrado? </span>
           <ButtonLink fontSize="16px">

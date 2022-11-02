@@ -135,7 +135,8 @@ const AddPacientContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
+  height: calc(100vh - 64px);
 `;
 
 const AddPacienteTitle = styled.h2`

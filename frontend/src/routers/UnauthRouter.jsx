@@ -8,14 +8,14 @@ import Home from '../components/Home';
 const UnauthRouter = ({ setUser }) => {
   return (
     <Routes>
-      <Route path="/" name="Home" element={<Home />} exact />
+      <Route path="/" name="home" element={<Home />} exact />
       <Route
         path="/login"
         name="Login"
         element={<Login setUser={setUser} />}
         exact
       />
-      <Route path="/login/sign-up" name="SignUp" element={<SignUp />} exact />
+      <Route path="/login/sign-up" name="signup" element={<SignUp />} exact />
     </Routes>
   );
 };

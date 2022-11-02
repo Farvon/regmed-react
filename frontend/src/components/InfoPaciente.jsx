@@ -8,8 +8,9 @@ import EditInfo from './EditInfo';
 import ViewComment from './ViewComment';
 import AddComment from './AddComment';
 import ButtonLink from './ButtonLink';
+import SideBar from './SideBar';
 
-const InfoPaciente = ({ dniPaciente }) => {
+const InfoPaciente = ({ dni, setDni }) => {
   const [paciente, setPaciente] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [commentsPerPage] = useState(2);
@@ -18,8 +19,8 @@ const InfoPaciente = ({ dniPaciente }) => {
   const [modalTitle, setModalTitle] = useState();
 
   useEffect(() => {
-    getPacientByDni(dniPaciente).then((paciente) => setPaciente(paciente));
-  }, [dniPaciente, showModal]);
+    getPacientByDni(dni).then((paciente) => setPaciente(paciente));
+  }, [dni, showModal]);
 
   // Get current comments
   const indexOfLastComment = currentPage * commentsPerPage;
@@ -33,9 +34,9 @@ const InfoPaciente = ({ dniPaciente }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <Contenedor>
+    <PageContainer>
+      <SideBar setDni={setDni} />
       <InfoContainer>
-        {/* Siempre validamos que exista antes de mostrarlo, sino hace boom */}
         {paciente && paciente.length !== 0 ? (
           <>
             <PersonalInfoContainer>
@@ -133,10 +134,7 @@ const InfoPaciente = ({ dniPaciente }) => {
                   onClick={() => {
                     setShowModal(true);
                     setModalContent(
-                      <AddComment
-                        dniPaciente={dniPaciente}
-                        setShowModal={setShowModal}
-                      />
+                      <AddComment dni={dni} setShowModal={setShowModal} />
                     );
                     setModalTitle('Agregar Comentario');
                   }}
@@ -165,22 +163,20 @@ const InfoPaciente = ({ dniPaciente }) => {
           <InfoTitle>Ups, parece que no hay nadie con ese DNI.</InfoTitle>
         )}
       </InfoContainer>
-    </Contenedor>
+    </PageContainer>
   );
 };
 
 export default InfoPaciente;
 
-const Contenedor = styled.div`
+const PageContainer = styled.div`
   display: flex;
-  width: 100%;
 `;
 
 const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: lightgray;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 64px);
+  background: #f4f6f5;
 `;
 
 const PersonalInfoContainer = styled.div`

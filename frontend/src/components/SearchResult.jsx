@@ -4,16 +4,18 @@ import styled from 'styled-components';
 
 import { getPacientByDni } from '../services/pacients';
 import ButtonLink from './ButtonLink';
+import SideBar from './SideBar';
 
-const SearchResult = ({ dniPaciente }) => {
+const SearchResult = ({ dni, setDni }) => {
   const [paciente, setPaciente] = useState([]);
 
   useEffect(() => {
-    getPacientByDni(dniPaciente).then((paciente) => setPaciente(paciente));
-  }, [dniPaciente]);
+    getPacientByDni(dni).then((paciente) => setPaciente(paciente));
+  }, [dni]);
 
   return (
-    <Contenedor>
+    <PageContainer>
+      <SideBar setDni={setDni} />
       <InfoContainer>
         {paciente ? (
           <>
@@ -48,22 +50,19 @@ const SearchResult = ({ dniPaciente }) => {
           <InfoTitle>Ups, parece que no hay nadie con ese DNI.</InfoTitle>
         )}
       </InfoContainer>
-    </Contenedor>
+    </PageContainer>
   );
 };
 
 export default SearchResult;
 
-const Contenedor = styled.div`
+const PageContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
 `;
 
 const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 64px);
   background: #f4f6f5;
 `;
 

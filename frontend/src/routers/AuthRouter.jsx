@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import HeaderComponent from '../components/HeaderComponent';
-import MainContainer from '../components/MainContainer';
+import WelcomePage from '../components/WelcomePage';
 import AdminContainer from '../components/AdminContainer';
+import SearchResult from '../components/SearchResult';
+import LayoutAuth from '../layout/LayoutAuth';
+import InfoPaciente from '../components/InfoPaciente';
+import AddPaciente from '../components/AddPaciente';
 
-const UnauthRouter = () => {
+const AuthRouter = () => {
   const [user, setUser] = useState();
+  const [dni, setDni] = useState();
 
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem('loggedRegMedUser');
@@ -17,24 +21,55 @@ const UnauthRouter = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        name="Menu"
-        element={
-          <>
-            <HeaderComponent />
-            {user && user.username === 'admin' ? (
-              <AdminContainer />
-            ) : (
-              <MainContainer />
-            )}
-          </>
-        }
-        exact
-      />
-    </Routes>
+    <LayoutAuth>
+      <Routes>
+        <Route
+          path="/"
+          name="menu"
+          element={
+            <>
+              {user && user.username === 'admin' ? (
+                <AdminContainer />
+              ) : (
+                <WelcomePage setDni={setDni} />
+              )}
+            </>
+          }
+          exact
+        />
+        <Route
+          path="/search"
+          name="search"
+          element={
+            <>
+              <SearchResult dni={dni} setDni={setDni} />
+            </>
+          }
+          exact
+        />
+        <Route
+          path="/info"
+          name="info"
+          element={
+            <>
+              <InfoPaciente dni={dni} setDni={setDni} />
+            </>
+          }
+          exact
+        />
+        <Route
+          path="/add-pacient"
+          name="add-pacient"
+          element={
+            <>
+              <AddPaciente />
+            </>
+          }
+          exact
+        />
+      </Routes>
+    </LayoutAuth>
   );
 };
 
-export default UnauthRouter;
+export default AuthRouter;
