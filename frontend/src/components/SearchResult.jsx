@@ -9,10 +9,16 @@ import { ILogo } from '../assets/icons/logo';
 
 const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState();
-  const [errorMsg, setErrorMsg] = useState();
 
   useEffect(() => {
-    dni && getPacientByDni(dni).then((paciente) => setPaciente(paciente));
+    console.log('search result', dni);
+    dni &&
+      getPacientByDni(dni)
+        .then((paciente) => setPaciente(paciente))
+        .catch((err) => {
+          console.error(err);
+          setPaciente(null);
+        });
   }, [dni]);
 
   return (
