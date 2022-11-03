@@ -11,7 +11,6 @@ const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState();
 
   useEffect(() => {
-    console.log('search result', dni);
     dni &&
       getPacientByDni(dni)
         .then((paciente) => setPaciente(paciente))
