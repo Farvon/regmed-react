@@ -10,11 +10,16 @@ import { ILogo } from '../assets/icons/logo';
 //Recibe el DNI a buscar
 const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState();
-  const [errorMsg, setErrorMsg] = useState();
 
   //Busca en la Base de Datos si existe un paciente con el DNI
   useEffect(() => {
-    dni && getPacientByDni(dni).then((paciente) => setPaciente(paciente));
+    dni &&
+      getPacientByDni(dni)
+        .then((paciente) => setPaciente(paciente))
+        .catch((err) => {
+          console.error(err);
+          setPaciente(null);
+        });
   }, [dni]);
 
   return (
