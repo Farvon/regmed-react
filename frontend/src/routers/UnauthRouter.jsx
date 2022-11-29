@@ -5,6 +5,9 @@ import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import Home from '../components/Home';
 
+//Este componente posee la página de inicio para usuarios no logeados
+//El login y el registro para nuevos usuarios.
+
 const UnauthRouter = ({ setUser }) => {
   return (
     <Routes>

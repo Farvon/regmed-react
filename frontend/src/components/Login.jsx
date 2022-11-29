@@ -13,6 +13,7 @@ const Login = ({ setUser }) => {
 
   const { alertError } = useAlert();
 
+  //Aquí se verifica si el usuario es "Guest" o no
   const handleLogin = (event, type) => {
     event.preventDefault();
     const credentials =
@@ -20,6 +21,7 @@ const Login = ({ setUser }) => {
         ? { username: 'guest', password: 'guest' }
         : { username, password };
 
+    //LLama al Backend enviando las credenciales del usuario a logear
     login(credentials)
       .then((response) => {
         localStorage.setItem('loggedRegMedUser', JSON.stringify(response));

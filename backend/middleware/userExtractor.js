@@ -8,6 +8,7 @@ module.exports = (request, response, next) => {
     token = authorization.substring(7);
   }
 
+  //Verifico Token con la clave secreta
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
   if (!token || !decodedToken.id) {

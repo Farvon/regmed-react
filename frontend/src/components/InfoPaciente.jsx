@@ -10,6 +10,7 @@ import AddComment from './AddComment';
 import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
 
+//Recibe el DNI buscado
 const InfoPaciente = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +19,7 @@ const InfoPaciente = ({ dni, setDni, user }) => {
   const [modalContent, setModalContent] = useState();
   const [modalTitle, setModalTitle] = useState();
 
+  //Busca el paciente en la base de datos
   useEffect(() => {
     getPacientByDni(dni).then((paciente) => setPaciente(paciente));
   }, [dni, showModal]);
@@ -37,6 +39,7 @@ const InfoPaciente = ({ dni, setDni, user }) => {
     <PageContainer>
       <SideBar setDni={setDni} user={user} />
       <InfoContainer>
+        {/* Si el paciente existe, muestra su información */}
         {paciente && paciente.length !== 0 ? (
           <>
             <PersonalInfoContainer>
@@ -131,6 +134,9 @@ const InfoPaciente = ({ dni, setDni, user }) => {
                     </ViewCommentBottonContainer>
                   </CommentContainer>
                 ))}
+
+                {/* Si el usuario no es "Guest" puede agregar
+                comentarios */}
                 {user && user.username !== 'guest' && (
                   <AddCommentButton
                     onClick={() => {

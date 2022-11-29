@@ -2,12 +2,14 @@ const pacientsRouter = require('express').Router();
 const Pacient = require('../models/Pacient');
 const userExtractor = require('../middleware/userExtractor');
 
+//veo todos los pacientes
 pacientsRouter.get('/', (request, response) => {
   Pacient.find({}).then((pacients) => {
     response.json(pacients);
   });
 });
 
+//Veo el paciente según el DNI
 pacientsRouter.get('/:dni', (request, response, next) => {
   const { dni } = request.params;
 
@@ -24,6 +26,7 @@ pacientsRouter.get('/:dni', (request, response, next) => {
     });
 });
 
+//Agrego un paciente
 pacientsRouter.post('/', userExtractor, (request, response) => {
   const pacient = request.body;
 
@@ -33,6 +36,7 @@ pacientsRouter.post('/', userExtractor, (request, response) => {
     });
   }
 
+  //Creo una nueva instancia del modelo de Paciente con la info
   const newPacient = new Pacient({
     nombre: pacient.nombre,
     apellido: pacient.apellido,
@@ -46,6 +50,7 @@ pacientsRouter.post('/', userExtractor, (request, response) => {
     historial: pacient.historial,
   });
 
+  //Lo guardo en la Base de Datos
   newPacient
     .save()
     .then((savedPacient) => {
@@ -57,6 +62,7 @@ pacientsRouter.post('/', userExtractor, (request, response) => {
     });
 });
 
+//Borra paciente segun el DNI
 pacientsRouter.delete('/:dni', userExtractor, (request, response, next) => {
   const { dni } = request.params;
 
@@ -67,6 +73,7 @@ pacientsRouter.delete('/:dni', userExtractor, (request, response, next) => {
     .catch((err) => next(err));
 });
 
+//Añade comentario a paciente segun DNI
 pacientsRouter.put(
   '/add-new-comment/:dni',
   userExtractor,
@@ -96,6 +103,7 @@ pacientsRouter.put(
   }
 );
 
+//Edita info del paciente segun DNI
 pacientsRouter.put('/edit-info/:dni', userExtractor, (request, response) => {
   const { dni } = request.params;
   const info = request.body;

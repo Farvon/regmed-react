@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
+//Componente para la barra lateral
 const SideBar = ({ setDni, user }) => {
   const [userInput, setUserInput] = useState('');
 
@@ -29,6 +30,8 @@ const SideBar = ({ setDni, user }) => {
         <StyledLink disabled={!userInput} to="/search">
           <StyledButton onClick={() => handleClick()}>Buscar</StyledButton>
         </StyledLink>
+        {/* Si el usuario es "guest" no verá el botón de
+        Agregar Paciente  */}
         {user && user.username !== 'guest' && (
           <StyledLink to="/add-pacient">
             <StyledButton onClick={() => setUserInput('')}>

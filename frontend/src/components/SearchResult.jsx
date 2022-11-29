@@ -7,10 +7,12 @@ import ButtonLink from './ButtonLink';
 import SideBar from './SideBar';
 import { ILogo } from '../assets/icons/logo';
 
+//Recibe el DNI a buscar
 const SearchResult = ({ dni, setDni, user }) => {
   const [paciente, setPaciente] = useState();
   const [errorMsg, setErrorMsg] = useState();
 
+  //Busca en la Base de Datos si existe un paciente con el DNI
   useEffect(() => {
     dni && getPacientByDni(dni).then((paciente) => setPaciente(paciente));
   }, [dni]);
@@ -19,6 +21,7 @@ const SearchResult = ({ dni, setDni, user }) => {
     <PageContainer>
       <SideBar setDni={setDni} user={user} />
       <InfoContainer>
+        {/* Si existe muestra el resultado, sino, un mensaje */}
         {paciente ? (
           <>
             <InfoTitle>Resultado de la búsqueda</InfoTitle>

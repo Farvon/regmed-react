@@ -13,6 +13,7 @@ const SignUp = () => {
 
   const { alertSuccess, alertError } = useAlert();
 
+  //Creo nuevo usuario
   const handleNewUser = (event) => {
     event.preventDefault();
     const newUser = {
@@ -22,6 +23,7 @@ const SignUp = () => {
       registration_number: registrationNumber,
     };
 
+    //LLamada a la base de datos con los datos del nuevo usuario
     registerNewUser(newUser)
       .then((res) => {
         alertSuccess(

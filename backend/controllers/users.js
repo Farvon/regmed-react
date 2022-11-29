@@ -2,11 +2,13 @@ const bcrypt = require('bcrypt');
 const usersRouter = require('express').Router();
 const User = require('../models/User');
 
+//Vemos los usuarios
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({});
   response.json(users);
 });
 
+//Agregamos usuario nuevo
 usersRouter.post('/', async (request, response) => {
   const { username, password, name, registration_number, type } = request.body;
 
@@ -30,6 +32,7 @@ usersRouter.post('/', async (request, response) => {
   }
 });
 
+//Actualizamos su Habilitación
 usersRouter.put('/:username', async (request, response) => {
   const { username } = request.params;
 

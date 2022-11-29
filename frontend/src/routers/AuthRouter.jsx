@@ -8,6 +8,8 @@ import LayoutAuth from '../layout/LayoutAuth';
 import InfoPaciente from '../components/InfoPaciente';
 import AddPaciente from '../components/AddPaciente';
 
+//Componente para usuarios ya logueados
+
 const AuthRouter = () => {
   const [user, setUser] = useState();
   const [dni, setDni] = useState();
@@ -28,6 +30,8 @@ const AuthRouter = () => {
           name="menu"
           element={
             <>
+              {/* Su el usuario es Admin nos deriva a su respectiva página
+            sino nos deriva al WelcomePage */}
               {user && user.username === 'admin' ? (
                 <AdminContainer />
               ) : (
@@ -37,6 +41,10 @@ const AuthRouter = () => {
           }
           exact
         />
+
+        {/* Estos son los ruteos, dependiendo el path nos derivará
+        a su respectivo componente */}
+
         <Route
           path="/search"
           name="search"

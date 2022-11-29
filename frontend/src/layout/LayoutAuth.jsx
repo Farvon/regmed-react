@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderComponent from '../components/HeaderComponent';
 
+//Este componente es la vista general donde se mantiene el Header
+//Siempre pero el resto de la app cambia dependiendo el path
 const LayoutAuth = (props) => {
   return (
     <LayoutAuthContainer id="layout-auth">
