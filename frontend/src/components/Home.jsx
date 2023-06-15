@@ -68,7 +68,7 @@ const DescriptionTitle = styled.span`
   font-size: calc(1.375rem + 1.5vw);
   font-weight: 500;
   margin: 16px 0;
-  ont-family: sans-serif;
+  font-family: sans-serif;
   line-height: 1.2;
   color: #475067;
 
@@ -81,7 +81,7 @@ const DescriptionTitle = styled.span`
 const DescriptionText = styled.span`
   font-size: 16px;
   font-weight: 300;
-  ont-family: sans-serif;
+  font-family: sans-serif;
   line-height: 1.2;
   color: #475067;
 `;
