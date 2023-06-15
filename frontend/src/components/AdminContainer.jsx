@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useAlert from '../hooks/useAlert';
 import { getUsers, enableUser } from '../services/users';
 
+//Página del usuario Admin donde se habilitan los nuevos usuarios.
 const AdminContainer = () => {
   const [users, setUsers] = useState();
   const { alertSuccess, alertError } = useAlert();
@@ -32,7 +33,6 @@ const AdminContainer = () => {
         <tbody>
           {users &&
             users.map((user, idx) => (
-              // <UsersContainer key={idx}>
               <tr>
                 <td>{user.username}</td>
                 <td>{user.name}</td>
@@ -42,7 +42,6 @@ const AdminContainer = () => {
                   </EnableButton>
                 </td>
               </tr>
-              // </UsersContainer>
             ))}
         </tbody>
       </Table>
@@ -60,15 +59,6 @@ const PageContainer = styled.div`
 
   h1 {
     padding: 16px;
-  }
-`;
-
-const UsersContainer = styled.div`
-  display: flex;
-  padding: 8px;
-
-  span {
-    font-size: 24px;
   }
 `;
 
