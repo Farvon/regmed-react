@@ -7,10 +7,7 @@ const Home = () => {
   return (
     <HomeContainer>
       <HeaderHome />
-      <BackgroundImg
-        src="http://todosn.com/fondo.jpg"
-        alt="RegMed Background"
-      />
+      <BackgroundImg src="../src/assets/fondo.jpg" alt="RegMed Background" />
       <SiteDescriptionContainer>
         <DescriptionSubtitle>- App para médicos -</DescriptionSubtitle>
         <DescriptionTitle>
